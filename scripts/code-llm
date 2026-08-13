@@ -245,9 +245,17 @@ nanny_start() {
     fi
 
     echo "Starting nanny bridge (Ollama API -> llama.cpp)..."
+
+    local review_flag=""
+    if [ "${NANNY_REVIEW:-true}" = "true" ]; then
+        review_flag="--review --max-fix-attempts ${NANNY_MAX_FIX:-3}"
+        echo "  Real-time code review: ENABLED"
+    fi
+
     python3 "$NANNY_SCRIPT" \
         --llama-port "$PORT" \
         --bridge-port "$BRIDGE_PORT" \
+        $review_flag \
         > /tmp/code-llm-nanny-bridge.log 2>&1 &
 
     local pid=$!
@@ -345,8 +353,10 @@ case "${1:-}" in
         echo "    nanny-run ARGS  - Run nanny with custom args (passes ARGS to baby-llm-nanny)"
         echo ""
         echo "Env overrides:"
-        echo "  CTX=8192 code-llm start   - Use larger context window (default 4096)"
-        echo "  BRIDGE_PORT=11440 code-llm nanny  - Use different bridge port"
+        echo "  CTX=8192 code-llm start         - Use larger context window (default 4096)"
+        echo "  NANNY_REVIEW=false code-llm nanny  - Disable real-time code review in bridge"
+        echo "  NANNY_MAX_FIX=5 code-llm nanny      - Max auto-fix retries (default 3)"
+        echo "  BRIDGE_PORT=11440 code-llm nanny    - Use different bridge port"
         exit 1
         ;;
 esac

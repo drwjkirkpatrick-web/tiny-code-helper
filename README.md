@@ -190,6 +190,29 @@ baby-llm-nanny  →  Ollama API (/api/generate)  →  nanny_bridge.py  →  llam
 
 The bridge strips Gemma 4 E2B's `reasoning_content` (thinking tokens) and passes only the final `content` through to the nanny — so screening measures actual answer quality, not thinking length.
 
+### Real-Time Deterministic Code Review
+
+When `--review` is enabled (default when using `code-llm nanny`), the bridge doesn't just translate — it **intercepts every response** and deterministically verifies any code it finds:
+
+1. **Detects code** — extracts Python from markdown fences (```python ... ```), generic fences, or bare `def`/`class` blocks
+2. **Syntax-checks** — compiles with `py_compile`, catches SyntaxError with line numbers
+3. **Execution-tests** — runs the code in an isolated subprocess to catch runtime errors
+4. **Auto-fixes** — if code fails, feeds the specific error message back to the model and re-queries
+5. **Repeats** — up to `--max-fix-attempts` (default 3) until code passes or attempts are exhausted
+6. **Returns** only the final verified code to the caller
+
+This means any tool talking to the bridge (baby-llm-nanny, curl, VS Code Continue, etc.) automatically gets syntax-verified code. The caller never sees a response with broken syntax — the bridge fixes it before returning.
+
+**Two layers of review:**
+- **Bridge layer** (real-time): syntax + execution check + auto-fix — runs on every request
+- **Nanny layer** (when using `--review`): functional test cases + generate→test→fix loop — runs on curated prompts
+
+The bridge catches *structural* errors (syntax, import failures, runtime crashes). The nanny catches *functional* errors (wrong output, wrong arguments, logic bugs). Together they provide deterministic verification that the code actually works.
+
+**Stats endpoint:** `curl http://127.0.0.1:11435/bridge/stats` shows:
+- Total requests, code detected, passed first try, fixed via retry
+- Whether review is enabled and max fix attempts
+
 ### Quick Start
 
 ```bash

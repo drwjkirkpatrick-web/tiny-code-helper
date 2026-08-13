@@ -1,0 +1,1967 @@
+{
+  "summary": {
+    "total_prompts": 25,
+    "total_checks": 258,
+    "total_passed": 247,
+    "total_failed": 11,
+    "pass_rate": "247/258",
+    "pass_percent": 95.7
+  },
+  "results": [
+    {
+      "id": "profile-basic",
+      "category": "profile",
+      "difficulty": "easy",
+      "prompt": "Create a simple HTML profile page for a student named Alex. Include their name as a heading, a short bio paragraph, and a photo placeholder. Use semantic HTML tags. Return only the HTML code.",
+      "html_output": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Alex's Profile</title>\n</head>\n<body>\n    <header>\n        <h1>Alex</h1>\n    </header>\n\n    <main>\n        <section id=\"profile-photo\">\n            <!-- Placeholder for the photo -->\n            <img src=\"profile-photo.jpg\" alt=\"A placeholder image of Alex\">\n        </section>\n\n        <section id=\"bio\">\n            <h2>About Me</h2>\n            <p>Alex is a dedicated student with a passion for technology and creative problem-solving. They are currently studying computer science and look forward to applying their skills in real-world projects.</p>\n        </section>\n    </main>\n</body>\n</html>",
+      "html_length": 753,
+      "reasoning_length": 1306,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Alex's Profile'"
+        },
+        {
+          "check": "has_h1",
+          "passed": true,
+          "detail": "Exactly one <h1> present"
+        },
+        {
+          "check": "p_balanced",
+          "passed": true,
+          "detail": "<p> balanced (1 pairs)"
+        },
+        {
+          "check": "has_img_alt",
+          "passed": true,
+          "detail": "All 1 <img> tags have alt attributes"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": false,
+          "detail": "No color styling found (page/game will be unstyled)"
+        }
+      ],
+      "check_results": {
+        "passed": 7,
+        "failed": 1,
+        "total": 8
+      },
+      "timing": {
+        "elapsed": 18.46672558784485,
+        "completion_tokens": 579,
+        "prompt_tokens": 56
+      }
+    },
+    {
+      "id": "profile-nav-header",
+      "category": "profile",
+      "difficulty": "medium",
+      "prompt": "Create an HTML profile page with a navigation bar at the top with links to Home, About, Projects sections. Include a header with the person's name 'Jordan Chen'. Use semantic HTML5 tags (nav, header, main, footer). Return only the HTML.",
+      "html_output": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Jordan Chen - Profile</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 0;\n            padding: 0;\n            background-color: #f4f4f9;\n            color: #333;\n        }\n        header {\n            background-color: #007bff;\n            color: white;\n            padding: 20px;\n            text-align: center;\n        }\n        header h1 {\n            margin: 0;\n        }\n        nav {\n            background-color: #333;\n            padding: 10px 0;\n            text-align: center;\n        }\n        nav ul {\n            list-style: none;\n            padding: 0;\n            margin: 0;\n            display: flex;\n            justify-content: center;\n        }\n        nav ul li {\n            margin: 0 15px;\n        }\n        nav ul li a {\n            color: white;\n            text-decoration: none;\n            font-weight: bold;\n            padding: 8px 15px;\n            border-radius: 5px;\n            transition: background-color 0.3s;\n        }\n        nav ul li a:hover {\n            background-color: #575757;\n        }\n        main {\n            padding: 20px;\n            max-width: 1000px;\n            margin: 20px auto;\n            background-color: white;\n            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n        }\n        footer {\n            background-color: #333;\n            color: white;\n            text-align: center;\n            padding: 10px 0;\n            margin-top: 20px;\n        }\n    </style>\n</head>\n<body>\n\n    <header>\n        <h1>Jordan Chen</h1>\n    </header>\n\n    <nav>\n        <ul>\n            <li><a href=\"#home\">Home</a></li>\n            <li><a href=\"#about\">About</a></li>\n            <li><a href=\"#projects\">Projects</a></li>\n        </ul>\n    </nav>\n\n    <main>\n        <h2>Welcome to my Profile</h2>\n        <p>This is the main content area of Jordan Chen's profile page. Here you can find detailed information about my skills, experience, and professional goals.</p>\n        \n        <section id=\"about\">\n            <h3>About Me</h3>\n            <p>I am a passionate developer with a strong background in web technologies and a commitment to creating innovative solutions.</p>\n        </section>\n\n        <section id=\"projects\">\n            <h3>My Projects</h3>\n            <p>Explore my portfolio of recent and ongoing projects.</p>\n            <ul>\n                <li>Project Alpha (Link)</li>\n                <li>Project Beta (Link)</li>\n            </ul>\n        </section>\n    </main>\n\n    <footer>\n        <p>&copy; 2024 Jordan Chen. All rights reserved.</p>\n    </footer>\n\n</body>\n</html>",
+      "html_length": 2752,
+      "reasoning_length": 1498,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Jordan Chen - Profile'"
+        },
+        {
+          "check": "has_nav_tag",
+          "passed": true,
+          "detail": "<nav> semantic tag present"
+        },
+        {
+          "check": "has_header_footer",
+          "passed": true,
+          "detail": "<header> and <footer> present"
+        },
+        {
+          "check": "has_main_tag",
+          "passed": true,
+          "detail": "<main> semantic tag present"
+        },
+        {
+          "check": "has_h1",
+          "passed": true,
+          "detail": "Exactly one <h1> present"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (0 pairs)"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        }
+      ],
+      "check_results": {
+        "passed": 10,
+        "failed": 0,
+        "total": 10
+      },
+      "timing": {
+        "elapsed": 34.21528625488281,
+        "completion_tokens": 1192,
+        "prompt_tokens": 70
+      }
+    },
+    {
+      "id": "profile-portfolio-gallery",
+      "category": "profile",
+      "difficulty": "medium",
+      "prompt": "Create an HTML portfolio page for a photographer. Include a gallery section with 4 image placeholders, each with alt text describing the photo. Add a section heading 'My Work'. Use proper semantic HTML. Return only the HTML.",
+      "html_output": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Photographer Portfolio</title>\n    <style>\n        /* Basic styling for readability - not strictly required by prompt, but improves structure */\n        body {\n            font-family: sans-serif;\n            margin: 0;\n            padding: 0;\n            background-color: #f4f4f4;\n            color: #333;\n        }\n        header {\n            background-color: #333;\n            color: white;\n            padding: 1em;\n            text-align: center;\n        }\n        .container {\n            max-width: 1000px;\n            margin: 20px auto;\n            padding: 20px;\n            background-color: white;\n            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n        }\n        h1 {\n            text-align: center;\n            color: #007bff;\n        }\n        h2 {\n            border-bottom: 2px solid #ccc;\n            padding-bottom: 10px;\n            margin-top: 30px;\n        }\n        .gallery {\n            display: grid;\n            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n            gap: 20px;\n            margin-top: 20px;\n        }\n        .gallery-item img {\n            width: 100%;\n            height: 200px; /* Placeholder height */\n            object-fit: cover;\n            border: 1px solid #ddd;\n        }\n    </style>\n</head>\n<body>\n\n    <header>\n        <h1>[Photographer Name]</h1>\n        <p>Capturing Moments, Creating Memories</p>\n    </header>\n\n    <main class=\"container\">\n        \n        <section id=\"my-work\">\n            <h2>My Work</h2>\n            \n            <figure class=\"gallery\">\n                \n                <!-- Image Placeholder 1 -->\n                <figure class=\"gallery-item\">\n                    <img src=\"placeholder1.jpg\" alt=\"A vibrant sunset over the ocean during golden hour.\">\n                    <figcaption>Sunset Serenity</figcaption>\n                </figure>\n\n                <!-- Image Placeholder 2 -->\n                <figure class=\"gallery-item\">\n                    <img src=\"placeholder2.jpg\" alt=\"A close-up portrait of a smiling woman in a forest setting.\">\n                    <figcaption>Forest Portrait</figcaption>\n                </figure>\n\n                <!-- Image Placeholder 3 -->\n                <figure class=\"gallery-item\">\n                    <img src=\"placeholder3.jpg\" alt=\"An architectural shot of a modern city skyline at night.\">\n                    <figcaption>City Lights</figcaption>\n                </figure>\n\n                <!-- Image Placeholder 4 -->\n                <figure class=\"gallery-item\">\n                    <img src=\"placeholder4.jpg\" alt=\"A candid shot of a family laughing together during a picnic.\">\n                    <figcaption>Family Moments</figcaption>\n                </figure>\n\n            </figure>\n\n        </section>\n\n    </main>\n\n</body>\n</html>",
+      "html_length": 2948,
+      "reasoning_length": 1451,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Photographer Portfolio'"
+        },
+        {
+          "check": "has_img_alt",
+          "passed": true,
+          "detail": "All 4 <img> tags have alt attributes"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (0 pairs)"
+        },
+        {
+          "check": "section_balanced",
+          "passed": true,
+          "detail": "<section> balanced (1 pairs)"
+        },
+        {
+          "check": "has_h1",
+          "passed": true,
+          "detail": "Exactly one <h1> present"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        }
+      ],
+      "check_results": {
+        "passed": 9,
+        "failed": 0,
+        "total": 9
+      },
+      "timing": {
+        "elapsed": 34.38365817070007,
+        "completion_tokens": 1180,
+        "prompt_tokens": 61
+      }
+    },
+    {
+      "id": "profile-contact-form",
+      "category": "profile",
+      "difficulty": "medium",
+      "prompt": "Create an HTML contact page with a form containing name, email, and message fields. Include a submit button. Add labels for each field. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Contact Us</title>\n</head>\n<body>\n\n    <h1>Contact Us</h1>\n\n    <form action=\"/submit-contact\" method=\"POST\">\n        \n        <div>\n            <label for=\"name\">Name:</label>\n            <input type=\"text\" id=\"name\" name=\"name\" required>\n        </div>\n\n        <div>\n            <label for=\"email\">Email:</label>\n            <input type=\"email\" id=\"email\" name=\"email\" required>\n        </div>\n\n        <div>\n            <label for=\"message\">Message:</label><br>\n            <textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n        </div>\n\n        <button type=\"submit\">Send Message</button>\n\n    </form>\n\n</body>\n</html>\n```",
+      "html_length": 808,
+      "reasoning_length": 1316,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Contact Us'"
+        },
+        {
+          "check": "has_form_action",
+          "passed": true,
+          "detail": "All 1 <form> tags have action attributes"
+        },
+        {
+          "check": "has_button_type",
+          "passed": true,
+          "detail": "All 1 <button> tags have type attributes"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": false,
+          "detail": "No color styling found (page/game will be unstyled)"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (3 pairs)"
+        }
+      ],
+      "check_results": {
+        "passed": 7,
+        "failed": 1,
+        "total": 8
+      },
+      "timing": {
+        "elapsed": 17.341391801834106,
+        "completion_tokens": 604,
+        "prompt_tokens": 49
+      }
+    },
+    {
+      "id": "profile-responsive-meta",
+      "category": "profile",
+      "difficulty": "easy",
+      "prompt": "Create a simple HTML profile page for a teacher named Ms. Park. Make it responsive by including the viewport meta tag. Include charset meta. Add a heading and a paragraph about her class. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Ms. Park - Teacher Profile</title>\n</head>\n<body>\n    <h1>Welcome to Ms. Park's Class</h1>\n    <p>Hello! I am Ms. Park, and I am thrilled to welcome you to my class. We will be exploring fascinating topics in history and literature, encouraging critical thinking and creative storytelling. Get ready for an engaging and insightful learning experience!</p>\n</body>\n</html>\n```",
+      "html_length": 536,
+      "reasoning_length": 1172,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Ms. Park - Teacher Profile'"
+        },
+        {
+          "check": "has_viewport_meta",
+          "passed": true,
+          "detail": "Viewport meta tag present"
+        },
+        {
+          "check": "has_charset_meta",
+          "passed": true,
+          "detail": "Charset meta tag present"
+        },
+        {
+          "check": "has_h1",
+          "passed": true,
+          "detail": "Exactly one <h1> present"
+        },
+        {
+          "check": "p_balanced",
+          "passed": true,
+          "detail": "<p> balanced (1 pairs)"
+        }
+      ],
+      "check_results": {
+        "passed": 8,
+        "failed": 0,
+        "total": 8
+      },
+      "timing": {
+        "elapsed": 14.5179443359375,
+        "completion_tokens": 471,
+        "prompt_tokens": 59
+      }
+    },
+    {
+      "id": "profile-skills-list",
+      "category": "profile",
+      "difficulty": "easy",
+      "prompt": "Create an HTML profile page for a developer named Sam. Include a section titled 'Skills' with an unordered list of 5 programming languages. Use semantic HTML tags. Return only the HTML.",
+      "html_output": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Sam - Developer Profile</title>\n</head>\n<body>\n\n    <header>\n        <h1>Sam</h1>\n        <p>Full-Stack Developer & Software Engineer</p>\n    </header>\n\n    <main>\n        <section id=\"about\">\n            <h2>About Me</h2>\n            <p>Hi, I'm Sam! I am a passionate developer with a strong background in building scalable web applications and robust backend systems. I love solving complex problems and turning ideas into functional code.</p>\n        </section>\n\n        <section id=\"skills\">\n            <h2>Skills</h2>\n            <ul>\n                <li>JavaScript</li>\n                <li>Python</li>\n                <li>React</li>\n                <li>SQL</li>\n                <li>C++</li>\n            </ul>\n        </section>\n    </main>\n\n</body>\n</html>",
+      "html_length": 916,
+      "reasoning_length": 1085,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Sam - Developer Profile'"
+        },
+        {
+          "check": "has_h1",
+          "passed": true,
+          "detail": "Exactly one <h1> present"
+        },
+        {
+          "check": "ul_li_balanced",
+          "passed": true,
+          "detail": "<ul>/<li> balanced (1 ul pairs, 5 li pairs)"
+        },
+        {
+          "check": "section_balanced",
+          "passed": true,
+          "detail": "<section> balanced (2 pairs)"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": false,
+          "detail": "No color styling found (page/game will be unstyled)"
+        }
+      ],
+      "check_results": {
+        "passed": 7,
+        "failed": 1,
+        "total": 8
+      },
+      "timing": {
+        "elapsed": 16.644448041915894,
+        "completion_tokens": 543,
+        "prompt_tokens": 54
+      }
+    },
+    {
+      "id": "profile-two-column-layout",
+      "category": "profile",
+      "difficulty": "hard",
+      "prompt": "Create an HTML profile page with a two-column layout using CSS. Left column has a sidebar with navigation links. Right column has the main content with a bio and photo. Use div elements with classes and internal CSS. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Profile Page</title>\n    <style>\n        /* Internal CSS */\n        body {\n            font-family: Arial, sans-serif;\n            margin: 0;\n            padding: 0;\n            background-color: #f4f4f9;\n        }\n\n        .profile-container {\n            display: flex;\n            max-width: 1200px;\n            margin: 20px auto;\n            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);\n            background-color: #ffffff;\n            min-height: 80vh;\n        }\n\n        /* Sidebar Styling */\n        .sidebar {\n            flex: 0 0 250px; /* Fixed width of 250px */\n            background-color: #2c3e50;\n            color: #ecf0f1;\n            padding: 20px;\n            box-sizing: border-box;\n        }\n\n        .sidebar h2 {\n            text-align: center;\n            margin-top: 0;\n            color: #ecf0f1;\n        }\n\n        .sidebar ul {\n            list-style: none;\n            padding: 0;\n        }\n\n        .sidebar ul li a {\n            display: block;\n            padding: 12px 15px;\n            margin-bottom: 8px;\n            text-decoration: none;\n            color: #bdc3c7;\n            border-radius: 5px;\n            transition: background-color 0.3s;\n        }\n\n        .sidebar ul li a:hover {\n            background-color: #34495e;\n            color: #ffffff;\n        }\n\n        /* Main Content Styling */\n        .main-content {\n            flex-grow: 1; /* Takes up the remaining space */\n            padding: 40px;\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n        }\n\n        .profile-header {\n            text-align: center;\n            margin-bottom: 30px;\n        }\n\n        .profile-photo {\n            width: 200px;\n            height: 200px;\n            border-radius: 50%;\n            object-fit: cover;\n            margin-bottom: 20px;\n            border: 5px solid #3498db;\n        }\n\n        .profile-header h1 {\n            margin: 0 0 10px 0;\n            color: #2c3e50;\n        }\n\n        .bio p {\n            line-height: 1.6;\n            color: #555;\n            margin-top: 20px;\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"profile-container\">\n        \n        <!-- Left Column: Sidebar Navigation -->\n        <div class=\"sidebar\">\n            <h2>Navigation</h2>\n            <ul>\n                <li><a href=\"#home\">Home</a></li>\n                <li><a href=\"#about\">About Me</a></li>\n                <li><a href=\"#projects\">Projects</a></li>\n                <li><a href=\"#contact\">Contact</a></li>\n                <li><a href=\"#skills\">Skills</a></li>\n            </ul>\n        </div>\n\n        <!-- Right Column: Main Content -->\n        <div class=\"main-content\">\n            <div class=\"profile-header\">\n                <!-- Placeholder for the profile image -->\n                <img src=\"https://via.placeholder.com/200\" alt=\"Profile Photo\" class=\"profile-photo\">\n                <h1>Jane Doe</h1>\n                <p>Web Developer & Designer</p>\n            </div>\n\n            <div class=\"bio\">\n                <h2>About Me</h2>\n                <p>\n                    Hello! I am a passionate full-stack developer with 5 years of experience in creating responsive and user-friendly web applications. I specialize in modern JavaScript frameworks and designing intuitive user interfaces. My goal is to build innovative solutions that solve real-world problems and enhance user experience. I love tackling complex challenges and continuously learning new technologies.\n                </p>\n                <p>\n                    When I'm not coding, I enjoy hiking and reading science fiction novels. Feel free to connect with me to discuss new projects or opportunities!\n                </p>\n            </div>\n        </div>\n\n    </div>\n\n</body>\n</html>\n```",
+      "html_length": 3947,
+      "reasoning_length": 1857,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Profile Page'"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (5 pairs)"
+        },
+        {
+          "check": "has_style_or_css_link",
+          "passed": true,
+          "detail": "CSS present (style tag or stylesheet link)"
+        },
+        {
+          "check": "has_h1",
+          "passed": true,
+          "detail": "Exactly one <h1> present"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        },
+        {
+          "check": "has_img_alt",
+          "passed": true,
+          "detail": "All 1 <img> tags have alt attributes"
+        }
+      ],
+      "check_results": {
+        "passed": 9,
+        "failed": 0,
+        "total": 9
+      },
+      "timing": {
+        "elapsed": 47.351654052734375,
+        "completion_tokens": 1564,
+        "prompt_tokens": 65
+      }
+    },
+    {
+      "id": "profile-social-links",
+      "category": "profile",
+      "difficulty": "medium",
+      "prompt": "Create an HTML profile page for a content creator. Include clickable social media links (GitHub, YouTube, Twitter) that open in new tabs. Add the creator's name as h1 and a short bio. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Content Creator Profile</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 40px;\n            background-color: #f4f4f9;\n            color: #333;\n            text-align: center;\n        }\n        .profile-container {\n            max-width: 700px;\n            margin: 0 auto;\n            background: #fff;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n        }\n        h1 {\n            color: #007bff;\n            margin-bottom: 15px;\n        }\n        p {\n            line-height: 1.6;\n            margin-bottom: 25px;\n        }\n        .social-links a {\n            display: inline-block;\n            margin: 0 15px;\n            padding: 10px 20px;\n            border-radius: 5px;\n            text-decoration: none;\n            font-weight: bold;\n            transition: background-color 0.3s;\n        }\n        .social-links a:hover {\n            background-color: #e9ecef;\n        }\n        .github-link { background-color: #24292e; color: white; }\n        .youtube-link { background-color: #ff0000; color: white; }\n        .twitter-link { background-color: #1da1f2; color: white; }\n    </style>\n</head>\n<body>\n\n    <div class=\"profile-container\">\n        <h1>Alex Creator</h1>\n\n        <p>\n            Welcome to my corner of the internet! I create engaging content focused on technology, coding tutorials, and creative storytelling. Follow along for weekly deep dives into the world of software development and digital art.\n        </p>\n\n        <h2>Connect with me:</h2>\n        <div class=\"social-links\">\n            <!-- Replace the '#' with actual URLs -->\n            <a href=\"https://github.com/alexcreator\" target=\"_blank\" class=\"github-link\">GitHub</a>\n            <a href=\"https://youtube.com/alexcreator\" target=\"_blank\" class=\"youtube-link\">YouTube</a>\n            <a href=\"https://twitter.com/alexcreator\" target=\"_blank\" class=\"twitter-link\">Twitter</a>\n        </div>\n    </div>\n\n</body>\n</html>\n```",
+      "html_length": 2195,
+      "reasoning_length": 1190,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Content Creator Profile'"
+        },
+        {
+          "check": "has_h1",
+          "passed": true,
+          "detail": "Exactly one <h1> present"
+        },
+        {
+          "check": "has_nav_tag",
+          "passed": false,
+          "detail": "Missing <nav> semantic tag (expected in profile pages)"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (2 pairs)"
+        }
+      ],
+      "check_results": {
+        "passed": 7,
+        "failed": 1,
+        "total": 8
+      },
+      "timing": {
+        "elapsed": 27.595479726791382,
+        "completion_tokens": 982,
+        "prompt_tokens": 63
+      }
+    },
+    {
+      "id": "profile-full-semantic",
+      "category": "profile",
+      "difficulty": "hard",
+      "prompt": "Create a complete HTML5 profile page using all semantic tags: header, nav, main, section, article, aside, and footer. The page is for a student named Riley who blogs about coding. Include a blog post excerpt in an article tag. Return only the HTML.",
+      "html_output": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Riley's Code Corner</title>\n    <style>\n        /* Basic styling for readability, not required by prompt but helpful for visualization */\n        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; color: #333; }\n        header { background-color: #007bff; color: white; padding: 20px; text-align: center; }\n        nav { background-color: #333; padding: 10px 0; text-align: center; }\n        nav a { color: white; margin: 0 15px; text-decoration: none; }\n        main { display: flex; max-width: 1200px; margin: 20px auto; padding: 0 20px; }\n        section { flex: 3; padding: 20px; background-color: white; margin-right: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n        article { margin-top: 20px; padding: 15px; border-left: 5px solid #28a745; background-color: #e9f7ee; }\n        aside { flex: 1; padding: 15px; background-color: #fff3cd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n        footer { background-color: #333; color: white; text-align: center; padding: 10px 0; margin-top: 20px; }\n    </style>\n</head>\n<body>\n\n    <header>\n        <h1>Riley's Code Corner</h1>\n        <p>Exploring the world of programming, one line of code at a time.</p>\n    </header>\n\n    <nav>\n        <a href=\"#home\">Home</a>\n        <a href=\"#about\">About Riley</a>\n        <a href=\"#blog\">Blog</a>\n        <a href=\"#contact\">Contact</a>\n    </nav>\n\n    <main>\n        <!-- Main content area divided into primary content and sidebar -->\n        <section id=\"about\">\n            <h2>About Riley</h2>\n            <p>Hi! I'm Riley, a passionate student diving deep into the world of software development. I believe coding is the language of the future, and I love sharing my learning journey, debugging struggles, and cool coding projects with the community. This space is dedicated to making complex concepts accessible and fun!</p>\n            <p>Currently focusing on JavaScript and Python, I'm always looking for new challenges and open-source opportunities.</p>\n        </section>\n\n        <article id=\"latest-post\">\n            <h3>Mastering Asynchronous JavaScript with Async/Await</h3>\n            <p><strong>Date:</strong> October 26, 2023 | <strong>Category:</strong> JavaScript, Async</p>\n            <p><strong>Excerpt:</strong> Dealing with asynchronous operations can feel like navigating a maze, but mastering Async/Await makes handling promises and callbacks incredibly clean and readable. In this post, I walk you through the core concepts, provide practical examples, and show you exactly how to write non-blocking code that performs flawlessly. Stop struggling with callbacks and start writing modern, efficient JavaScript!</p>\n            <a href=\"#\">Read the full post &rarr;</a>\n        </article>\n\n        <aside>\n            <h3>Quick Links</h3>\n            <ul>\n                <li><a href=\"#\">GitHub Profile</a></li>\n                <li><a href=\"#\">My Favorite IDEs</a></li>\n                <li><a href=\"#\">Subscribe to Newsletter</a></li>\n                <li><a href=\"#\">Contact Me</a></li>\n            </ul>\n            <p><strong>Follow Riley on:</strong></p>\n            <p>[Social Media Icons Placeholder]</p>\n        </aside>\n    </main>\n\n    <footer>\n        <p>&copy; 2023 Riley's Code Corner. All rights reserved. | Built with Semantic HTML.</p>\n    </footer>\n\n</body>\n</html>",
+      "html_length": 3532,
+      "reasoning_length": 1814,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Riley's Code Corner'"
+        },
+        {
+          "check": "has_nav_tag",
+          "passed": true,
+          "detail": "<nav> semantic tag present"
+        },
+        {
+          "check": "has_header_footer",
+          "passed": true,
+          "detail": "<header> and <footer> present"
+        },
+        {
+          "check": "has_main_tag",
+          "passed": true,
+          "detail": "<main> semantic tag present"
+        },
+        {
+          "check": "has_h1",
+          "passed": true,
+          "detail": "Exactly one <h1> present"
+        },
+        {
+          "check": "section_balanced",
+          "passed": true,
+          "detail": "<section> balanced (1 pairs)"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (0 pairs)"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        }
+      ],
+      "check_results": {
+        "passed": 11,
+        "failed": 0,
+        "total": 11
+      },
+      "timing": {
+        "elapsed": 49.74204730987549,
+        "completion_tokens": 1477,
+        "prompt_tokens": 71
+      }
+    },
+    {
+      "id": "profile-styled-card",
+      "category": "profile",
+      "difficulty": "medium",
+      "prompt": "Create an HTML profile card for a team member named Dana. Use a div with class 'card' that contains a photo placeholder, name, job title, and a short description. Style it with CSS inside a style tag — give the card a border, padding, and rounded corners. Return only the HTML.",
+      "html_output": "```html\n<div class=\"card\">\n    <div class=\"photo-placeholder\"></div>\n    <h2>Dana</h2>\n    <p class=\"job-title\">Senior Software Developer</p>\n    <p class=\"description\">Dana is responsible for leading the development of our core platform and ensuring high-quality code delivery.</p>\n</div>\n\n<style>\n    .card {\n        border: 1px solid #ccc;\n        border-radius: 12px;\n        padding: 20px;\n        margin: 20px;\n        width: 300px;\n        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n        background-color: #f9f9f9;\n        text-align: center;\n    }\n\n    .photo-placeholder {\n        width: 120px;\n        height: 120px;\n        background-color: #e0e0e0;\n        border-radius: 50%;\n        margin: 0 auto 15px;\n        border: 3px solid #fff;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        font-size: 30px;\n        color: #666;\n    }\n\n    .card h2 {\n        margin-top: 0;\n        color: #333;\n    }\n\n    .job-title {\n        font-style: italic;\n        color: #555;\n        margin-bottom: 10px;\n    }\n\n    .description {\n        font-size: 14px;\n        color: #777;\n    }\n</style>\n```",
+      "html_length": 1142,
+      "reasoning_length": 1150,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": false,
+          "detail": "Missing <!DOCTYPE html>"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": false,
+          "detail": "Missing <html> tags (open=False, close=False)"
+        },
+        {
+          "check": "has_head_body",
+          "passed": false,
+          "detail": "Missing head/body (head=False, body=False)"
+        },
+        {
+          "check": "has_title",
+          "passed": false,
+          "detail": "Missing or empty <title> tag"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (2 pairs)"
+        },
+        {
+          "check": "has_style_or_css_link",
+          "passed": true,
+          "detail": "CSS present (style tag or stylesheet link)"
+        },
+        {
+          "check": "has_img_alt",
+          "passed": true,
+          "detail": "No <img> tags (alt check N/A)"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        },
+        {
+          "check": "has_h1",
+          "passed": false,
+          "detail": "Missing <h1> tag (page should have one main heading)"
+        }
+      ],
+      "check_results": {
+        "passed": 4,
+        "failed": 5,
+        "total": 9
+      },
+      "timing": {
+        "elapsed": 21.855679512023926,
+        "completion_tokens": 725,
+        "prompt_tokens": 78
+      }
+    },
+    {
+      "id": "profile-table-schedule",
+      "category": "profile",
+      "difficulty": "medium",
+      "prompt": "Create an HTML page showing a student's weekly class schedule using a table. Include a header row with days of the week. Add at least 3 rows of class data. Style the table with CSS borders. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Weekly Class Schedule</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            margin: 20px;\n        }\n        table {\n            width: 60%;\n            border-collapse: collapse;\n            margin: 25px 0;\n            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\n        }\n        th, td {\n            border: 1px solid #dddddd;\n            text-align: left;\n            padding: 12px;\n        }\n        th {\n            background-color: #f2f2f2;\n            color: #333;\n            font-weight: bold;\n        }\n        tr:nth-child(even) {\n            background-color: #f9f9f9;\n        }\n        tr:hover {\n            background-color: #f1f1f1;\n        }\n    </style>\n</head>\n<body>\n\n    <h1>Student Weekly Schedule</h1>\n\n    <table>\n        <thead>\n            <tr>\n                <th>Time Slot</th>\n                <th>Monday</th>\n                <th>Tuesday</th>\n                <th>Wednesday</th>\n                <th>Thursday</th>\n                <th>Friday</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr>\n                <td>9:00 AM - 10:00 AM</td>\n                <td>Math</td>\n                <td>History</td>\n                <td>Science</td>\n                <td>Math</td>\n                <td>Art</td>\n            </tr>\n            <tr>\n                <td>10:00 AM - 11:00 AM</td>\n                <td>English</td>\n                <td>History</td>\n                <td>Math</td>\n                <td>Science</td>\n                <td>PE</td>\n            </tr>\n            <tr>\n                <td>1:00 PM - 2:00 PM</td>\n                <td>Study Hall</td>\n                <td>English</td>\n                <td>History</td>\n                <td>Study Hall</td>\n                <td>Study Hall</td>\n            </tr>\n        </tbody>\n    </table>\n\n</body>\n</html>\n```",
+      "html_length": 1994,
+      "reasoning_length": 1324,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Weekly Class Schedule'"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        },
+        {
+          "check": "has_style_or_css_link",
+          "passed": true,
+          "detail": "CSS present (style tag or stylesheet link)"
+        },
+        {
+          "check": "has_h1",
+          "passed": true,
+          "detail": "Exactly one <h1> present"
+        },
+        {
+          "check": "tags_balanced",
+          "passed": false,
+          "detail": "Check error: _tags_balanced() missing 1 required positional argument: 'tag'"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (0 pairs)"
+        }
+      ],
+      "check_results": {
+        "passed": 8,
+        "failed": 1,
+        "total": 9
+      },
+      "timing": {
+        "elapsed": 24.155496835708618,
+        "completion_tokens": 888,
+        "prompt_tokens": 64
+      }
+    },
+    {
+      "id": "profile-complete-portfolio",
+      "category": "profile",
+      "difficulty": "hard",
+      "prompt": "Create a complete personal portfolio HTML page for a web developer named Max. Include: a header with name and tagline, navigation links, an about section, a projects section with 3 project cards, a skills section with a list, and a footer with copyright. Use semantic HTML5 and internal CSS. Make it responsive with viewport meta. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Max | Web Developer Portfolio</title>\n    <style>\n        /* Global Styles */\n        :root {\n            --primary-color: #007bff;\n            --secondary-color: #6c757d;\n            --background-color: #f8f9fa;\n            --text-color: #343a40;\n            --card-bg: #ffffff;\n            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n        }\n\n        body {\n            font-family: 'Arial', sans-serif;\n            margin: 0;\n            padding: 0;\n            background-color: var(--background-color);\n            color: var(--text-color);\n            line-height: 1.6;\n        }\n\n        .container {\n            width: 90%;\n            max-width: 1200px;\n            margin: 0 auto;\n            padding: 20px 0;\n        }\n\n        /* Header */\n        header {\n            background-color: var(--text-color);\n            color: white;\n            padding: 20px 0;\n            text-align: center;\n            box-shadow: var(--shadow);\n        }\n\n        header h1 {\n            margin: 0;\n            font-size: 2.5em;\n        }\n\n        header p {\n            margin-top: 5px;\n            font-size: 1.1em;\n            opacity: 0.9;\n        }\n\n        /* Navigation */\n        nav {\n            background-color: var(--primary-color);\n            padding: 10px 0;\n            position: sticky;\n            top: 0;\n            z-index: 1000;\n        }\n\n        nav ul {\n            list-style: none;\n            padding: 0;\n            margin: 0;\n            display: flex;\n            justify-content: center;\n        }\n\n        nav ul li {\n            margin: 0 15px;\n        }\n\n        nav ul li a {\n            color: white;\n            text-decoration: none;\n            font-weight: bold;\n            padding: 5px 10px;\n            transition: background-color 0.3s;\n        }\n\n        nav ul li a:hover {\n            background-color: rgba(255, 255, 255, 0.2);\n            border-radius: 5px;\n        }\n\n        /* Sections */\n        section {\n            padding: 60px 0;\n        }\n\n        section:nth-child(odd) {\n            background-color: var(--card-bg);\n        }\n\n        h2 {\n            text-align: center;\n            margin-bottom: 40px;\n            font-size: 2em;\n            color: var(--primary-color);\n        }\n\n        /* About Section */\n        #about p {\n            text-align: center;\n            max-width: 800px;\n            margin: 0 auto;\n            font-size: 1.1em;\n        }\n\n        /* Projects Section */\n        #projects .project-grid {\n            display: grid;\n            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n            gap: 30px;\n        }\n\n        .project-card {\n            background-color: var(--card-bg);\n            border-radius: 8px;\n            box-shadow: var(--shadow);\n            padding: 20px;\n            transition: transform 0.3s;\n        }\n\n        .project-card:hover {\n            transform: translateY(-5px);\n        }\n\n        .project-card h3 {\n            color: var(--primary-color);\n            margin-top: 0;\n        }\n\n        /* Skills Section */\n        #skills ul {\n            list-style: none;\n            padding: 0;\n            display: flex;\n            flex-wrap: wrap;\n            justify-content: center;\n            gap: 15px;\n        }\n\n        #skills ul li {\n            background-color: var(--primary-color);\n            color: white;\n            padding: 10px 20px;\n            border-radius: 20px;\n            font-weight: bold;\n            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n        }\n\n        /* Footer */\n        footer {\n            background-color: var(--text-color);\n            color: white;\n            text-align: center;\n            padding: 20px 0;\n            margin-top: 30px;\n        }\n\n        /* Responsive Adjustments */\n        @media (max-width: 768px) {\n            header h1 {\n                font-size: 2em;\n            }\n\n            nav ul {\n                flex-direction: column;\n                align-items: center;\n            }\n\n            nav ul li {\n                margin: 5px 0;\n            }\n\n            section {\n                padding: 40px 0;\n            }\n        }\n    </style>\n</head>\n<body>\n\n    <header>\n        <div class=\"container\">\n            <h1>Max</h1>\n            <p>Full Stack Web Developer | Building beautiful and functional digital experiences.</p>\n        </div>\n    </header>\n\n    <nav>\n        <ul>\n            <li><a href=\"#about\">About</a></li>\n            <li><a href=\"#projects\">Projects</a></li>\n            <li><a href=\"#skills\">Skills</a></li>\n        </ul>\n    </nav>\n\n    <main>\n        <!-- About Section -->\n        <section id=\"about\">\n            <div class=\"container\">\n                <h2>About Me</h2>\n                <p>\n                    Hi, I'm Max, a passionate web developer with a strong foundation in modern front-",
+      "html_length": 7867,
+      "reasoning_length": 1928,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Max | Web Developer Portfolio'"
+        },
+        {
+          "check": "has_viewport_meta",
+          "passed": true,
+          "detail": "Viewport meta tag present"
+        },
+        {
+          "check": "has_charset_meta",
+          "passed": true,
+          "detail": "Charset meta tag present"
+        },
+        {
+          "check": "has_nav_tag",
+          "passed": true,
+          "detail": "<nav> semantic tag present"
+        },
+        {
+          "check": "has_header_footer",
+          "passed": true,
+          "detail": "<header> and <footer> present"
+        },
+        {
+          "check": "has_main_tag",
+          "passed": true,
+          "detail": "<main> semantic tag present"
+        },
+        {
+          "check": "has_h1",
+          "passed": true,
+          "detail": "Exactly one <h1> present"
+        },
+        {
+          "check": "section_balanced",
+          "passed": true,
+          "detail": "<section> balanced (3 pairs)"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (6 pairs)"
+        },
+        {
+          "check": "ul_li_balanced",
+          "passed": true,
+          "detail": "<ul>/<li> balanced (2 ul pairs, 12 li pairs)"
+        },
+        {
+          "check": "has_style_or_css_link",
+          "passed": true,
+          "detail": "CSS present (style tag or stylesheet link)"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        }
+      ],
+      "check_results": {
+        "passed": 15,
+        "failed": 0,
+        "total": 15
+      },
+      "timing": {
+        "elapsed": 70.96250581741333,
+        "completion_tokens": 2557,
+        "prompt_tokens": 88
+      }
+    },
+    {
+      "id": "game-bouncing-ball",
+      "category": "game",
+      "difficulty": "easy",
+      "prompt": "Create an HTML5 canvas game where a ball bounces around the screen. The ball should change direction when it hits the canvas edges. Use JavaScript with requestAnimationFrame for the game loop. Include the canvas and script in a single HTML file. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Bouncing Ball Game</title>\n    <style>\n        body {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            min-height: 100vh;\n            margin: 0;\n            background-color: #f0f0f0;\n        }\n        canvas {\n            border: 2px solid #333;\n            background-color: #ffffff;\n        }\n    </style>\n</head>\n<body>\n\n    <canvas id=\"gameCanvas\" width=\"600\" height=\"400\"></canvas>\n\n    <script>\n        const canvas = document.getElementById('gameCanvas');\n        const ctx = canvas.getContext('2d');\n\n        // Ball properties\n        let ball = {\n            x: canvas.width / 2,\n            y: canvas.height / 2,\n            radius: 15,\n            dx: 3, // velocity in x direction\n            dy: 3  // velocity in y direction\n        };\n\n        // Function to draw the ball\n        function drawBall() {\n            ctx.beginPath();\n            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);\n            ctx.fillStyle = \"#0095DD\";\n            ctx.fill();\n            ctx.closePath();\n        }\n\n        // Function to update the ball's position and handle bouncing\n        function update() {\n            // 1. Update position\n            ball.x += ball.dx;\n            ball.y += ball.dy;\n\n            // 2. Collision detection (Horizontal walls)\n            if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {\n                ball.dx = -ball.dx; // Reverse horizontal direction\n            }\n\n            // 3. Collision detection (Vertical walls)\n            if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {\n                ball.dy = -ball.dy; // Reverse vertical direction\n            }\n\n            // Redraw the scene\n            draw();\n        }\n\n        // Main drawing function\n        function draw() {\n            // Clear the canvas on every frame\n            ctx.clearRect(0, 0, canvas.width, canvas.height);\n\n            // Draw the ball\n            drawBall();\n        }\n\n        // Game loop using requestAnimationFrame\n        function gameLoop() {\n            update();\n            requestAnimationFrame(gameLoop);\n        }\n\n        // Start the game\n        gameLoop();\n\n    </script>\n\n</body>\n</html>\n```",
+      "html_length": 2336,
+      "reasoning_length": 1820,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Bouncing Ball Game'"
+        },
+        {
+          "check": "has_canvas",
+          "passed": true,
+          "detail": "<canvas> with id attribute present"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_get_context",
+          "passed": true,
+          "detail": "canvas.getContext('2d') present"
+        },
+        {
+          "check": "has_request_animation_frame",
+          "passed": true,
+          "detail": "requestAnimationFrame present (game loop)"
+        },
+        {
+          "check": "has_clear_rect",
+          "passed": true,
+          "detail": "clearRect() present (canvas cleared each frame)"
+        },
+        {
+          "check": "has_collision_or_boundary",
+          "passed": true,
+          "detail": "Collision/boundary handling present"
+        }
+      ],
+      "check_results": {
+        "passed": 11,
+        "failed": 0,
+        "total": 11
+      },
+      "timing": {
+        "elapsed": 32.65968203544617,
+        "completion_tokens": 1120,
+        "prompt_tokens": 68
+      }
+    },
+    {
+      "id": "game-click-counter",
+      "category": "game",
+      "difficulty": "easy",
+      "prompt": "Create an HTML5 game where the player clicks a moving target to score points. Use canvas for the target, and display the score on screen. Use addEventListener for click events. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Click the Target Game</title>\n    <style>\n        body {\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            justify-content: center;\n            min-height: 100vh;\n            margin: 0;\n            background-color: #f0f0f0;\n            font-family: Arial, sans-serif;\n        }\n        #game-container {\n            background-color: #fff;\n            border: 2px solid #333;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n            padding: 20px;\n            border-radius: 10px;\n        }\n        canvas {\n            border: 1px solid #ccc;\n            background-color: #eee;\n        }\n        #score-board {\n            margin-top: 15px;\n            font-size: 1.5em;\n            font-weight: bold;\n            color: #333;\n        }\n    </style>\n</head>\n<body>\n\n    <div id=\"game-container\">\n        <h1>Click the Moving Target!</h1>\n        <canvas id=\"gameCanvas\" width=\"600\" height=\"400\"></canvas>\n        <div id=\"score-board\">Score: 0</div>\n    </div>\n\n    <script>\n        const canvas = document.getElementById('gameCanvas');\n        const ctx = canvas.getContext('2d');\n        const scoreDisplay = document.getElementById('score-board');\n\n        let score = 0;\n        let target = {\n            x: 0,\n            y: 0,\n            size: 20,\n            speed: 3,\n            direction: 1 // 1 for right, -1 for left\n        };\n\n        // --- Game Initialization ---\n        function initializeGame() {\n            target.x = canvas.width / 2;\n            target.y = canvas.height / 2;\n            score = 0;\n            scoreDisplay.textContent = `Score: ${score}`;\n            draw(); // Initial draw\n        }\n\n        // --- Drawing Functions ---\n        function drawTarget() {\n            ctx.fillStyle = 'red';\n            ctx.beginPath();\n            ctx.arc(target.x, target.y, target.size, 0, Math.PI * 2);\n            ctx.fill();\n        }\n\n        function draw() {\n            // Clear the canvas\n            ctx.clearRect(0, 0, canvas.width, canvas.height);\n\n            // Draw the target\n            drawTarget();\n        }\n\n        // --- Movement Logic ---\n        function updateTargetPosition() {\n            // Move the target\n            target.x += target.speed * target.direction;\n\n            // Check boundaries and reverse direction\n            if (target.x + target.size > canvas.width || target.x - target.size < 0) {\n                target.direction *= -1; // Reverse direction\n            }\n        }\n\n        // --- Click Handling ---\n        function handleClick(event) {\n            // Get click coordinates relative to the canvas\n            const rect = canvas.getBoundingClientRect();\n            const clickX = event.clientX - rect.left;\n            const clickY = event.clientY - rect.top;\n\n            // Check if the click is within the target's radius\n            const distance = Math.sqrt(\n                Math.pow(clickX - target.x, 2) + Math.pow(clickY - target.y, 2)\n            );\n\n            if (distance < target.size) {\n                score++;\n                scoreDisplay.textContent = `Score: ${score}`;\n                // Reset target position after a successful click (optional, but makes the game more dynamic)\n                target.x = canvas.width / 2;\n                target.y = canvas.height / 2;\n            }\n        }\n\n        // --- Game Loop ---\n        function gameLoop() {\n            updateTargetPosition();\n            draw();\n            requestAnimationFrame(gameLoop);\n        }\n\n        // --- Event Listener Setup ---\n        canvas.addEventListener('click', handleClick);\n\n        // Start the game\n        initializeGame();\n        gameLoop();\n\n    </script>\n\n</body>\n</html>\n```",
+      "html_length": 3905,
+      "reasoning_length": 1829,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Click the Target Game'"
+        },
+        {
+          "check": "has_canvas",
+          "passed": true,
+          "detail": "<canvas> with id attribute present"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_get_context",
+          "passed": true,
+          "detail": "canvas.getContext('2d') present"
+        },
+        {
+          "check": "has_event_listener",
+          "passed": true,
+          "detail": "Event listener(s) present"
+        },
+        {
+          "check": "has_score_variable",
+          "passed": true,
+          "detail": "Score variable found in game code"
+        },
+        {
+          "check": "has_clear_rect",
+          "passed": true,
+          "detail": "clearRect() present (canvas cleared each frame)"
+        }
+      ],
+      "check_results": {
+        "passed": 11,
+        "failed": 0,
+        "total": 11
+      },
+      "timing": {
+        "elapsed": 43.32113718986511,
+        "completion_tokens": 1499,
+        "prompt_tokens": 57
+      }
+    },
+    {
+      "id": "game-keyboard-move",
+      "category": "game",
+      "difficulty": "medium",
+      "prompt": "Create an HTML5 canvas game where the player moves a square left and right using arrow keys. Show the square on a canvas. Use keydown event listeners. Use requestAnimationFrame for smooth movement. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Canvas Square Mover</title>\n    <style>\n        body {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            min-height: 100vh;\n            margin: 0;\n            background-color: #f0f0f0;\n        }\n        canvas {\n            border: 2px solid #333;\n            background-color: #ffffff;\n        }\n    </style>\n</head>\n<body>\n\n    <canvas id=\"gameCanvas\" width=\"600\" height=\"400\"></canvas>\n\n    <script>\n        // --- Canvas Setup ---\n        const canvas = document.getElementById('gameCanvas');\n        const ctx = canvas.getContext('2d');\n\n        // --- Game Variables ---\n        const square = {\n            x: 50,\n            y: 180,\n            width: 50,\n            height: 50,\n            speed: 5,\n            color: 'blue'\n        };\n\n        // State tracking for movement\n        const keys = {\n            left: false,\n            right: false\n        };\n\n        // --- Input Handling ---\n\n        document.addEventListener('keydown', (e) => {\n            if (e.key === 'ArrowLeft') {\n                keys.left = true;\n            } else if (e.key === 'ArrowRight') {\n                keys.right = true;\n            }\n        });\n\n        document.addEventListener('keyup', (e) => {\n            if (e.key === 'ArrowLeft') {\n                keys.left = false;\n            } else if (e.key === 'ArrowRight') {\n                keys.right = false;\n            }\n        });\n\n        // --- Game Logic ---\n\n        function update() {\n            // Check for movement based on key states\n            if (keys.left) {\n                square.x -= square.speed;\n            }\n            if (keys.right) {\n                square.x += square.speed;\n            }\n\n            // Boundary checks (keep the square within the canvas)\n            if (square.x < 0) {\n                square.x = 0;\n            }\n            if (square.x + square.width > canvas.width) {\n                square.x = canvas.width - square.width;\n            }\n        }\n\n        function draw() {\n            // 1. Clear the canvas for the next frame\n            ctx.clearRect(0, 0, canvas.width, canvas.height);\n\n            // 2. Draw the square\n            ctx.fillStyle = square.color;\n            ctx.fillRect(square.x, square.y, square.width, square.height);\n        }\n\n        // --- Main Game Loop ---\n\n        function gameLoop() {\n            update();\n            draw();\n            \n            // Request the next frame for smooth animation\n            requestAnimationFrame(gameLoop);\n        }\n\n        // Start the game loop\n        gameLoop();\n\n    </script>\n\n</body>\n</html>\n```",
+      "html_length": 2801,
+      "reasoning_length": 2347,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Canvas Square Mover'"
+        },
+        {
+          "check": "has_canvas",
+          "passed": true,
+          "detail": "<canvas> with id attribute present"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_get_context",
+          "passed": true,
+          "detail": "canvas.getContext('2d') present"
+        },
+        {
+          "check": "has_keydown_listener",
+          "passed": true,
+          "detail": "keydown event listener present"
+        },
+        {
+          "check": "has_request_animation_frame",
+          "passed": true,
+          "detail": "requestAnimationFrame present (game loop)"
+        },
+        {
+          "check": "has_clear_rect",
+          "passed": true,
+          "detail": "clearRect() present (canvas cleared each frame)"
+        }
+      ],
+      "check_results": {
+        "passed": 11,
+        "failed": 0,
+        "total": 11
+      },
+      "timing": {
+        "elapsed": 39.08445191383362,
+        "completion_tokens": 1359,
+        "prompt_tokens": 60
+      }
+    },
+    {
+      "id": "game-simple-platformer",
+      "category": "game",
+      "difficulty": "hard",
+      "prompt": "Create a simple HTML5 platformer game on canvas. The player is a square that can jump with the spacebar and move with arrow keys. Draw a platform the player can stand on. Use gravity in the game logic. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Simple Canvas Platformer</title>\n    <style>\n        body {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            min-height: 100vh;\n            margin: 0;\n            background-color: #f0f0f0;\n        }\n        canvas {\n            border: 2px solid #333;\n            background-color: #87CEEB; /* Sky blue background */\n        }\n    </style>\n</head>\n<body>\n    <canvas id=\"gameCanvas\" width=\"800\" height=\"400\"></canvas>\n\n    <script>\n        const canvas = document.getElementById('gameCanvas');\n        const ctx = canvas.getContext('2d');\n\n        // --- Game Constants ---\n        const GRAVITY = 0.5;\n        const JUMP_STRENGTH = -10;\n        const PLAYER_SIZE = 30;\n        const MOVE_SPEED = 5;\n\n        // --- Player Object ---\n        const player = {\n            x: 50,\n            y: canvas.height - PLAYER_SIZE - 50,\n            width: PLAYER_SIZE,\n            height: PLAYER_SIZE,\n            vx: 0, // velocity x\n            vy: 0, // velocity y\n            onGround: false\n        };\n\n        // --- Platform Array ---\n        const platforms = [\n            // Ground platform\n            { x: 0, y: canvas.height - 20, width: canvas.width, height: 20 },\n            // Floating platform 1\n            { x: 150, y: 300, width: 150, height: 20 },\n            // Floating platform 2\n            { x: 400, y: 200, width: 100, height: 20 },\n        ];\n\n        // --- Input Handling ---\n        const keys = {\n            left: false,\n            right: false,\n            space: false\n        };\n\n        window.addEventListener('keydown', (e) => {\n            if (e.code === 'ArrowLeft') keys.left = true;\n            if (e.code === 'ArrowRight') keys.right = true;\n            if (e.code === 'Space') keys.space = true;\n        });\n\n        window.addEventListener('keyup', (e) => {\n            if (e.code === 'ArrowLeft') keys.left = false;\n            if (e.code === 'ArrowRight') keys.right = false;\n            if (e.code === 'Space') keys.space = false;\n        });\n\n        // --- Game Logic Functions ---\n\n        function handleMovement() {\n            player.vx = 0;\n\n            if (keys.left) {\n                player.vx = -MOVE_SPEED;\n            }\n            if (keys.right) {\n                player.vx = MOVE_SPEED;\n            }\n\n            // Apply horizontal movement\n            player.x += player.vx;\n\n            // Boundary checks\n            if (player.x < 0) player.x = 0;\n            if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;\n        }\n\n        function handleJumping() {\n            if (keys.space && player.onGround) {\n                player.vy = JUMP_STRENGTH;\n                player.onGround = false;\n            }\n        }\n\n        function applyGravity() {\n            // Apply gravity\n            player.vy += GRAVITY;\n            player.y += player.vy;\n        }\n\n        function checkCollisions() {\n            player.onGround = false;\n\n            // Check collision with platforms\n            platforms.forEach(platform => {\n                // AABB Collision Detection\n                if (player.x < platform.x + platform.width &&\n                    player.x + player.width > platform.x &&\n                    player.y + player.height > platform.y &&\n                    player.y < platform.y + platform.height) {\n\n                    // Collision detected\n                    \n                    // If falling onto the platform\n                    if (player.vy >= 0) {\n                        player.y = platform.y - player.height;\n                        player.vy = 0;\n                        player.onGround = true;\n                    } \n                    // Simple side collision handling (prevents sticking)\n                    else if (player.vy < 0) {\n                        // Hit from below\n                        player.y = platform.y + platform.height;\n                        player.vy = 0;\n                    }\n                }\n            });\n        }\n\n        function update() {\n            handleMovement();\n            applyGravity();\n            checkCollisions();\n        }\n\n        function draw() {\n            // Clear canvas\n            ctx.clearRect(0, 0, canvas.width, canvas.height);\n\n            // Draw Platforms\n            ctx.fillStyle = '#228B22'; // Forest green\n            platforms.forEach(platform => {\n                ctx.fillRect(platform.x, platform.y, platform.width, platform.height);\n            });\n\n            // Draw Player\n            ctx.fillStyle = 'red';\n            ctx.fillRect(player.x, player.y, player.width, player.height);\n        }\n\n        // --- Main Game Loop ---\n        function gameLoop() {\n            update();\n            draw();\n            requestAnimationFrame(gameLoop);\n        }\n\n        // Start ",
+      "html_length": 5063,
+      "reasoning_length": 2405,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Simple Canvas Platformer'"
+        },
+        {
+          "check": "has_canvas",
+          "passed": true,
+          "detail": "<canvas> with id attribute present"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_get_context",
+          "passed": true,
+          "detail": "canvas.getContext('2d') present"
+        },
+        {
+          "check": "has_keydown_listener",
+          "passed": true,
+          "detail": "keydown event listener present"
+        },
+        {
+          "check": "has_request_animation_frame",
+          "passed": true,
+          "detail": "requestAnimationFrame present (game loop)"
+        },
+        {
+          "check": "has_clear_rect",
+          "passed": true,
+          "detail": "clearRect() present (canvas cleared each frame)"
+        },
+        {
+          "check": "has_collision_or_boundary",
+          "passed": true,
+          "detail": "Collision/boundary handling present"
+        }
+      ],
+      "check_results": {
+        "passed": 12,
+        "failed": 0,
+        "total": 12
+      },
+      "timing": {
+        "elapsed": 55.28429865837097,
+        "completion_tokens": 1976,
+        "prompt_tokens": 66
+      }
+    },
+    {
+      "id": "game-snake-clone",
+      "category": "game",
+      "difficulty": "hard",
+      "prompt": "Create a simple Snake game using HTML5 canvas. The snake moves automatically and the player steers with arrow keys. Food appears randomly. The score increases when food is eaten. Include the game loop with requestAnimationFrame or setInterval. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Simple Snake Game</title>\n    <style>\n        body {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            flex-direction: column;\n            height: 100vh;\n            margin: 0;\n            background-color: #222;\n            font-family: Arial, sans-serif;\n        }\n        canvas {\n            border: 2px solid #4CAF50;\n            background-color: #000;\n        }\n        h1 {\n            color: #4CAF50;\n        }\n    </style>\n</head>\n<body>\n\n    <h1>Snake Game</h1>\n    <canvas id=\"gameCanvas\" width=\"400\" height=\"400\"></canvas>\n\n    <script>\n        const canvas = document.getElementById('gameCanvas');\n        const ctx = canvas.getContext('2d');\n\n        // Game Constants\n        const GRID_SIZE = 20;\n        const TILE_COUNT = canvas.width / GRID_SIZE;\n        let gameLoopInterval;\n        let gameSpeed = 150; // milliseconds per frame (controls speed)\n\n        // Game State\n        let snake = [{ x: 10, y: 10 }]; // Initial snake position (head at 10, 10)\n        let dx = 0; // Direction X (0: stopped, 1: right, -1: left, 2: up, -2: down)\n        let dy = 0; // Direction Y\n        let food = {};\n        let score = 0;\n        let gameRunning = true;\n\n        // --- Input Handling ---\n        document.addEventListener('keydown', changeDirection);\n\n        function changeDirection(event) {\n            const keyPressed = event.key;\n            \n            // Map keys to direction changes\n            switch (keyPressed) {\n                case 'ArrowUp':\n                    if (dy === 0) { dx = 0; dy = -1 * GRID_SIZE; }\n                    break;\n                case 'ArrowDown':\n                    if (dy === 0) { dx = 0; dy = 1 * GRID_SIZE; }\n                    break;\n                case 'ArrowLeft':\n                    if (dx === 0) { dx = -1 * GRID_SIZE; dy = 0; }\n                    break;\n                case 'ArrowRight':\n                    if (dx === 0) { dx = 1 * GRID_SIZE; dy = 0; }\n                    break;\n            }\n        }\n\n        // --- Game Logic ---\n\n        function generateFood() {\n            let newFood;\n            do {\n                newFood = {\n                    x: Math.floor(Math.random() * TILE_COUNT) * GRID_SIZE,\n                    y: Math.floor(Math.random() * TILE_COUNT) * GRID_SIZE\n                };\n            } while (isFoodOnSnake(newFood));\n            food = newFood;\n        }\n\n        function isFoodOnSnake(pos) {\n            return snake.some(segment => segment.x === pos.x && segment.y === pos.y);\n        }\n\n        function checkCollision() {\n            const head = snake[0];\n\n            // 1. Wall Collision\n            const hitWall = head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height;\n            if (hitWall) {\n                gameOver();\n                return true;\n            }\n\n            // 2. Self Collision\n            for (let i = 1; i < snake.length; i++) {\n                if (head.x === snake[i].x && head.y === snake[i].y) {\n                    gameOver();\n                    return true;\n                }\n            }\n            return false;\n        }\n\n        function moveSnake() {\n            // Create the new head position\n            const newHead = { x: snake[0].x + dx, y: snake[0].y + dy };\n\n            // Add the new head to the front\n            snake.unshift(newHead);\n\n            // Check if food was eaten\n            if (newHead.x === food.x && newHead.y === food.y) {\n                score++;\n                generateFood(); // Generate new food\n                // Snake grows by not removing the tail segment\n            } else {\n                // If no food eaten, remove the tail segment to simulate movement\n                snake.pop();\n            }\n        }\n\n        function draw() {\n            // Clear the canvas\n            ctx.fillStyle = 'black';\n            ctx.fillRect(0, 0, canvas.width, canvas.height);\n\n            // Draw Food\n            ctx.fillStyle = 'red';\n            ctx.fillRect(food.x, food.y, GRID_SIZE, GRID_SIZE);\n\n            // Draw Snake\n            snake.forEach((segment, index) => {\n                ctx.fillStyle = index === 0 ? 'lime' : 'lightgreen';\n                ctx.fillRect(segment.x, segment.y, GRID_SIZE, GRID_SIZE);\n            });\n\n            // Draw Score\n            ctx.fillStyle = 'white';\n            ctx.font = '20px Arial';\n            ctx.fillText(`Score: ${score}`, 10, 30);\n        }\n\n        function gameLoop() {\n            if (!gameRunning) return;\n\n            moveSnake();\n            \n            if (checkCollision()) {\n                gameRunning = false;\n                clearInterval(gameLoopInterval);\n                alert(`Game Over! Your final score is: ${score}`);\n            }\n\n            draw();\n        }\n\n        function sta",
+      "html_length": 5519,
+      "reasoning_length": 2744,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Simple Snake Game'"
+        },
+        {
+          "check": "has_canvas",
+          "passed": true,
+          "detail": "<canvas> with id attribute present"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_get_context",
+          "passed": true,
+          "detail": "canvas.getContext('2d') present"
+        },
+        {
+          "check": "has_keydown_listener",
+          "passed": true,
+          "detail": "keydown event listener present"
+        },
+        {
+          "check": "has_score_variable",
+          "passed": true,
+          "detail": "Score variable found in game code"
+        },
+        {
+          "check": "has_clear_rect",
+          "passed": false,
+          "detail": "No clearRect() found (canvas will have motion trails)"
+        },
+        {
+          "check": "has_collision_or_boundary",
+          "passed": true,
+          "detail": "Collision/boundary handling present"
+        }
+      ],
+      "check_results": {
+        "passed": 11,
+        "failed": 1,
+        "total": 12
+      },
+      "timing": {
+        "elapsed": 66.05555152893066,
+        "completion_tokens": 2118,
+        "prompt_tokens": 65
+      }
+    },
+    {
+      "id": "game-color-matcher",
+      "category": "game",
+      "difficulty": "medium",
+      "prompt": "Create an HTML5 game where colored squares appear on canvas and the player must click the one matching a displayed color name. Track the score. Use addEventListener for clicks. Use fillStyle to set colors. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Color Match Game</title>\n    <style>\n        body {\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            font-family: Arial, sans-serif;\n            background-color: #f4f4f9;\n            margin: 0;\n            padding-top: 20px;\n        }\n        canvas {\n            border: 2px solid #333;\n            background-color: #fff;\n            cursor: pointer;\n        }\n        #score {\n            margin-bottom: 15px;\n            font-size: 1.5em;\n            font-weight: bold;\n            color: #333;\n        }\n    </style>\n</head>\n<body>\n\n    <div id=\"score\">Score: 0</div>\n    <canvas id=\"gameCanvas\" width=\"600\" height=\"400\"></canvas>\n\n    <script>\n        const canvas = document.getElementById('gameCanvas');\n        const ctx = canvas.getContext('2d');\n        const scoreDisplay = document.getElementById('score');\n\n        let score = 0;\n        let squares = [];\n        let targetColor = '';\n        const COLORS = ['red', 'blue', 'green', 'yellow', 'purple'];\n        const SQUARE_SIZE = 40;\n\n        // --- Game State Management ---\n\n        function updateScore(points) {\n            score += points;\n            scoreDisplay.textContent = `Score: ${score}`;\n        }\n\n        function generateNewTarget() {\n            targetColor = COLORS[Math.floor(Math.random() * COLORS.length)];\n        }\n\n        function createSquare() {\n            const x = Math.random() * (canvas.width - SQUARE_SIZE);\n            const y = Math.random() * (canvas.height - SQUARE_SIZE);\n            const color = COLORS[Math.floor(Math.random() * COLORS.length)];\n\n            squares.push({\n                x: x,\n                y: y,\n                color: color,\n                id: Date.now() + Math.random() // Unique ID\n            });\n        }\n\n        function draw() {\n            // Clear the canvas\n            ctx.clearRect(0, 0, canvas.width, canvas.height);\n\n            // Draw the target color name\n            ctx.fillStyle = '#000';\n            ctx.font = '20px Arial';\n            ctx.textAlign = 'center';\n            ctx.fillText(`Match the ${targetColor.toUpperCase()}`, canvas.width / 2, 30);\n\n            // Draw all squares\n            squares.forEach(square => {\n                ctx.fillStyle = square.color;\n                ctx.fillRect(square.x, square.y, SQUARE_SIZE, SQUARE_SIZE);\n            });\n        }\n\n        function initializeGame() {\n            score = 0;\n            squares = [];\n            updateScore(0);\n            generateNewTarget();\n            \n            // Start with 5 squares\n            for (let i = 0; i < 5; i++) {\n                createSquare();\n            }\n            draw();\n        }\n\n        // --- Interaction Logic ---\n\n        function handleClick(event) {\n            // Get click coordinates relative to the canvas\n            const rect = canvas.getBoundingClientRect();\n            const clickX = event.clientX - rect.left;\n            const clickY = event.clientY - rect.top;\n\n            let hitSquare = null;\n\n            // Check if the click hits any existing square\n            for (const square of squares) {\n                if (clickX >= square.x && clickX <= square.x + SQUARE_SIZE &&\n                    clickY >= square.y && clickY <= square.y + SQUARE_SIZE) {\n                    hitSquare = square;\n                    break;\n                }\n            }\n\n            if (hitSquare) {\n                // Check for match\n                if (hitSquare.color === targetColor) {\n                    updateScore(1);\n                    // Remove the square\n                    squares = squares.filter(s => s.id !== hitSquare.id);\n                    \n                    // Generate a new square\n                    createSquare();\n                    generateNewTarget();\n                } else {\n                    // Incorrect match - penalize or do nothing\n                    console.log(\"Incorrect match!\");\n                }\n                draw(); // Redraw the canvas after state change\n            }\n        }\n\n        // --- Initialization ---\n\n        canvas.addEventListener('click', handleClick);\n        initializeGame();\n\n    </script>\n</body>\n</html>\n```",
+      "html_length": 4373,
+      "reasoning_length": 2432,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Color Match Game'"
+        },
+        {
+          "check": "has_canvas",
+          "passed": true,
+          "detail": "<canvas> with id attribute present"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_get_context",
+          "passed": true,
+          "detail": "canvas.getContext('2d') present"
+        },
+        {
+          "check": "has_event_listener",
+          "passed": true,
+          "detail": "Event listener(s) present"
+        },
+        {
+          "check": "has_score_variable",
+          "passed": true,
+          "detail": "Score variable found in game code"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        },
+        {
+          "check": "has_clear_rect",
+          "passed": true,
+          "detail": "clearRect() present (canvas cleared each frame)"
+        }
+      ],
+      "check_results": {
+        "passed": 12,
+        "failed": 0,
+        "total": 12
+      },
+      "timing": {
+        "elapsed": 49.26052904129028,
+        "completion_tokens": 1703,
+        "prompt_tokens": 62
+      }
+    },
+    {
+      "id": "game-avoid-obstacles",
+      "category": "game",
+      "difficulty": "hard",
+      "prompt": "Create an HTML5 canvas game where the player (a square) moves with arrow keys to avoid falling obstacles. Obstacles spawn at the top and fall down. If the player gets hit, the game ends. Track and display the score. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Falling Obstacle Dodger</title>\n    <style>\n        body {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            min-height: 100vh;\n            margin: 0;\n            background-color: #222;\n            font-family: Arial, sans-serif;\n        }\n        canvas {\n            border: 2px solid #4CAF50;\n            background-color: #000;\n        }\n    </style>\n</head>\n<body>\n    <canvas id=\"gameCanvas\" width=\"600\" height=\"400\"></canvas>\n\n    <script>\n        const canvas = document.getElementById('gameCanvas');\n        const ctx = canvas.getContext('2d');\n\n        // --- Game Constants ---\n        const GAME_WIDTH = canvas.width;\n        const GAME_HEIGHT = canvas.height;\n        const PLAYER_SIZE = 30;\n        const PLAYER_SPEED = 5;\n        const OBSTACLE_SPEED = 3;\n        const OBSTACLE_WIDTH = 40;\n        const OBSTACLE_HEIGHT = 20;\n\n        // --- Game State ---\n        let player = {\n            x: GAME_WIDTH / 2 - PLAYER_SIZE / 2,\n            y: GAME_HEIGHT - PLAYER_SIZE - 10,\n            width: PLAYER_SIZE,\n            height: PLAYER_SIZE,\n            color: '#4CAF50'\n        };\n\n        let obstacles = [];\n        let score = 0;\n        let gameRunning = true;\n        let keys = {\n            left: false,\n            right: false\n        };\n\n        // --- Input Handling ---\n        document.addEventListener('keydown', (e) => {\n            if (e.key === 'ArrowLeft') keys.left = true;\n            if (e.key === 'ArrowRight') keys.right = true;\n        });\n\n        document.addEventListener('keyup', (e) => {\n            if (e.key === 'ArrowLeft') keys.left = false;\n            if (e.key === 'ArrowRight') keys.right = false;\n        });\n\n        // --- Drawing Functions ---\n\n        function drawPlayer() {\n            ctx.fillStyle = player.color;\n            ctx.fillRect(player.x, player.y, player.width, player.height);\n        }\n\n        function drawObstacles() {\n            ctx.fillStyle = '#FF5722'; // Orange/Red for obstacles\n            obstacles.forEach(obs => {\n                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);\n            });\n        }\n\n        function drawScore() {\n            ctx.fillStyle = '#FFF';\n            ctx.font = '20px Arial';\n            ctx.fillText(`Score: ${score}`, 10, 30);\n        }\n\n        function drawGameOver() {\n            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';\n            ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);\n            \n            ctx.fillStyle = '#FFF';\n            ctx.font = '40px Arial';\n            ctx.textAlign = 'center';\n            ctx.fillText('GAME OVER', GAME_WIDTH / 2, GAME_HEIGHT / 2 - 30);\n            ctx.font = '20px Arial';\n            ctx.fillText(`Final Score: ${score}`, GAME_WIDTH / 2, GAME_HEIGHT / 2 + 20);\n            ctx.fillText('Refresh to play again', GAME_WIDTH / 2, GAME_HEIGHT / 2 + 60);\n        }\n\n        // --- Game Logic ---\n\n        function spawnObstacle() {\n            const x = Math.random() * (GAME_WIDTH - OBSTACLE_WIDTH);\n            obstacles.push({\n                x: x,\n                y: -OBSTACLE_HEIGHT, // Start above the screen\n                width: OBSTACLE_WIDTH,\n                height: OBSTACLE_HEIGHT\n            });\n        }\n\n        function updatePlayer() {\n            if (keys.left) {\n                player.x -= PLAYER_SPEED;\n            }\n            if (keys.right) {\n                player.x += PLAYER_SPEED;\n            }\n\n            // Keep player within bounds\n            if (player.x < 0) {\n                player.x = 0;\n            }\n            if (player.x + player.width > GAME_WIDTH) {\n                player.x = GAME_WIDTH - player.width;\n            }\n        }\n\n        function updateObstacles() {\n            // Move existing obstacles\n            obstacles.forEach(obs => {\n                obs.y += OBSTACLE_SPEED;\n            });\n\n            // Remove obstacles that fall off the bottom\n            obstacles = obstacles.filter(obs => obs.y < GAME_HEIGHT);\n        }\n\n        function checkCollisions() {\n            for (const obs of obstacles) {\n                // Check for collision between player and obstacle\n                if (player.x < obs.x + obs.width &&\n                    player.x + player.width > obs.x &&\n                    player.y < obs.y + obs.height &&\n                    player.y + player.height > obs.y) {\n                    \n                    // Collision detected! Game Over.\n                    gameRunning = false;\n                }\n            }\n        }\n\n        function updateScore() {\n            // Simple scoring: increase score every frame the game is running\n            score += 1;\n        }\n\n        // --- Main Game Loop ---\n\n        function gameLoop() {\n            if (!gameRunning) {\n                drawGameOver();\n                return;\n ",
+      "html_length": 5698,
+      "reasoning_length": 2357,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Falling Obstacle Dodger'"
+        },
+        {
+          "check": "has_canvas",
+          "passed": true,
+          "detail": "<canvas> with id attribute present"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_get_context",
+          "passed": true,
+          "detail": "canvas.getContext('2d') present"
+        },
+        {
+          "check": "has_keydown_listener",
+          "passed": true,
+          "detail": "keydown event listener present"
+        },
+        {
+          "check": "has_score_variable",
+          "passed": true,
+          "detail": "Score variable found in game code"
+        },
+        {
+          "check": "has_request_animation_frame",
+          "passed": true,
+          "detail": "requestAnimationFrame present (game loop)"
+        },
+        {
+          "check": "has_clear_rect",
+          "passed": true,
+          "detail": "clearRect() present (canvas cleared each frame)"
+        },
+        {
+          "check": "has_collision_or_boundary",
+          "passed": true,
+          "detail": "Collision/boundary handling present"
+        }
+      ],
+      "check_results": {
+        "passed": 13,
+        "failed": 0,
+        "total": 13
+      },
+      "timing": {
+        "elapsed": 60.863128662109375,
+        "completion_tokens": 2175,
+        "prompt_tokens": 69
+      }
+    },
+    {
+      "id": "game-breakout-clone",
+      "category": "game",
+      "difficulty": "hard",
+      "prompt": "Create a simple Breakout game on HTML5 canvas. The player controls a paddle at the bottom with arrow keys. A ball bounces off walls, paddle, and bricks at the top. Destroy all bricks to win. Track the score. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Simple Breakout</title>\n    <style>\n        body {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n            background-color: #f0f0f0;\n            font-family: Arial, sans-serif;\n        }\n        canvas {\n            border: 2px solid #333;\n            background-color: #eee;\n        }\n    </style>\n</head>\n<body>\n    <canvas id=\"breakoutCanvas\" width=\"480\" height=\"320\"></canvas>\n\n    <script>\n        const canvas = document.getElementById('breakoutCanvas');\n        const ctx = canvas.getContext('2d');\n\n        // --- Game Constants ---\n        const PADDLE_HEIGHT = 10;\n        const PADDLE_WIDTH = 75;\n        const BALL_RADIUS = 5;\n        const BRICK_WIDTH = 50;\n        const BRICK_HEIGHT = 20;\n        const BRICK_PADDING = 10;\n        const BRICK_ROWS = 5;\n        const BRICK_COLS = 8;\n\n        // --- Game State ---\n        let score = 0;\n        let gameRunning = true;\n\n        // --- Paddle Object ---\n        let paddle = {\n            x: (canvas.width - PADDLE_WIDTH) / 2,\n            y: canvas.height - PADDLE_HEIGHT - 10,\n            width: PADDLE_WIDTH,\n            height: PADDLE_HEIGHT,\n            speed: 7\n        };\n\n        // --- Ball Object ---\n        let ball = {\n            x: canvas.width / 2,\n            y: canvas.height - 30,\n            radius: BALL_RADIUS,\n            dx: 3, // velocity x\n            dy: -3 // velocity y\n        };\n\n        // --- Brick Array ---\n        let bricks = [];\n\n        // --- Input Handling ---\n        let rightPressed = false;\n        let leftPressed = false;\n\n        document.addEventListener(\"keydown\", keyDownHandler, false);\n        document.addEventListener(\"keyup\", keyUpHandler, false);\n\n        function keyDownHandler(e) {\n            if (e.key === \"Right\" || e.key === \"ArrowRight\") {\n                rightPressed = true;\n            } else if (e.key === \"Left\" || e.key === \"ArrowLeft\") {\n                leftPressed = true;\n            }\n        }\n\n        function keyUpHandler(e) {\n            if (e.key === \"Right\" || e.key === \"ArrowRight\") {\n                rightPressed = false;\n            } else if (e.key === \"Left\" || e.key === \"ArrowLeft\") {\n                leftPressed = false;\n            }\n        }\n\n        // --- Brick Initialization ---\n        function initializeBricks() {\n            bricks = [];\n            for (let c = 0; c < BRICK_COLS; c++) {\n                bricks[c] = [];\n                for (let r = 0; r < BRICK_ROWS; r++) {\n                    // x, y, status (1 = active)\n                    bricks[c][r] = { x: 0, y: 0, status: 1 };\n                }\n            }\n        }\n\n        // --- Drawing Functions ---\n\n        function drawPaddle() {\n            ctx.beginPath();\n            ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);\n            ctx.fillStyle = \"#0095DD\";\n            ctx.fill();\n            ctx.closePath();\n        }\n\n        function drawBall() {\n            ctx.beginPath();\n            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);\n            ctx.fillStyle = \"#000000\";\n            ctx.fill();\n            ctx.closePath();\n        }\n\n        function drawBricks() {\n            for (let c = 0; c < BRICK_COLS; c++) {\n                for (let r = 0; r < BRICK_ROWS; r++) {\n                    if (bricks[c][r].status === 1) {\n                        const brickX = (c * (BRICK_WIDTH + BRICK_PADDING)) + 10;\n                        const brickY = (r * (BRICK_HEIGHT + BRICK_PADDING)) + 30;\n                        bricks[c][r].x = brickX;\n                        bricks[c][r].y = brickY;\n\n                        ctx.beginPath();\n                        ctx.rect(brickX, brickY, BRICK_WIDTH, BRICK_HEIGHT);\n                        ctx.fillStyle = \"#FF6347\"; // Tomato red\n                        ctx.fill();\n                        ctx.closePath();\n                    }\n                }\n            }\n        }\n\n        function drawScore() {\n            ctx.font = \"16px Arial\";\n            ctx.fillStyle = \"#000\";\n            ctx.fillText(\"Score: \" + score, 10, 20);\n        }\n\n        // --- Collision Detection ---\n\n        function collisionDetection() {\n            for (let c = 0; c < BRICK_COLS; c++) {\n                for (let r = 0; r < BRICK_ROWS; r++) {\n                    const b = bricks[c][r];\n                    if (b.status === 1) {\n                        // Check if ball is within the brick bounds\n                        if (ball.x > b.x && ball.x < b.x + BRICK_WIDTH &&\n                            ball.y > b.y && ball.y < b.y + BRICK_HEIGHT) {\n                            \n                            ball.dy = -ball.dy; // Reverse vertical direction\n                            b.status = 0; // Destroy the brick\n                            score+",
+      "html_length": 6898,
+      "reasoning_length": 2564,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Simple Breakout'"
+        },
+        {
+          "check": "has_canvas",
+          "passed": true,
+          "detail": "<canvas> with id attribute present"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_get_context",
+          "passed": true,
+          "detail": "canvas.getContext('2d') present"
+        },
+        {
+          "check": "has_keydown_listener",
+          "passed": true,
+          "detail": "keydown event listener present"
+        },
+        {
+          "check": "has_score_variable",
+          "passed": true,
+          "detail": "Score variable found in game code"
+        },
+        {
+          "check": "has_request_animation_frame",
+          "passed": true,
+          "detail": "requestAnimationFrame present (game loop)"
+        },
+        {
+          "check": "has_clear_rect",
+          "passed": true,
+          "detail": "clearRect() present (canvas cleared each frame)"
+        },
+        {
+          "check": "has_collision_or_boundary",
+          "passed": true,
+          "detail": "Collision/boundary handling present"
+        }
+      ],
+      "check_results": {
+        "passed": 13,
+        "failed": 0,
+        "total": 13
+      },
+      "timing": {
+        "elapsed": 72.37376308441162,
+        "completion_tokens": 2508,
+        "prompt_tokens": 68
+      }
+    },
+    {
+      "id": "game-memory-cards",
+      "category": "game",
+      "difficulty": "medium",
+      "prompt": "Create an HTML5 memory card matching game. Use a grid of cards (div elements, not canvas). When a card is clicked, it flips. If two cards match, they stay face up. Track the number of moves. Use JavaScript with addEventListener. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Memory Card Game</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            background-color: #f4f4f9;\n            padding: 20px;\n        }\n\n        #game-container {\n            display: grid;\n            grid-template-columns: repeat(4, 100px);\n            grid-gap: 10px;\n            margin-top: 30px;\n            perspective: 1000px; /* Needed for 3D flip effect */\n        }\n\n        .card {\n            width: 100px;\n            height: 100px;\n            position: relative;\n            transform-style: preserve-3d;\n            transition: transform 0.6s;\n            cursor: pointer;\n            border-radius: 8px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .card.flipped {\n            transform: rotateY(180deg);\n        }\n\n        .card.matched {\n            cursor: default;\n            opacity: 0.7;\n            pointer-events: none; /* Disable clicks on matched cards */\n            transform: scale(0.95);\n        }\n\n        .card-face {\n            position: absolute;\n            width: 100%;\n            height: 100%;\n            backface-visibility: hidden;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            border-radius: 8px;\n            font-size: 2em;\n            font-weight: bold;\n            border: 2px solid #333;\n        }\n\n        .card-front {\n            background-color: #4CAF50; /* Green front */\n            color: white;\n        }\n\n        .card-back {\n            background-color: #2196F3; /* Blue back */\n            color: white;\n            transform: rotateY(180deg);\n        }\n\n        #stats {\n            margin-top: 20px;\n            font-size: 1.2em;\n            font-weight: bold;\n            color: #333;\n        }\n    </style>\n</head>\n<body>\n\n    <h1>Memory Match Game</h1>\n    <div id=\"stats\">Moves: 0</div>\n    <div id=\"game-container\">\n        <!-- Cards will be injected here by JavaScript -->\n    </div>\n\n    <script>\n        document.addEventListener('DOMContentLoaded', () => {\n            const gameContainer = document.getElementById('game-container');\n            const statsDisplay = document.getElementById('stats');\n            \n            // Define the card symbols (8 unique pairs = 16 cards total)\n            const cardSymbols = ['🍎', '🍌', '🍇', '🍓', '🥝', '🍍', '🍉', '🍊'];\n            let cardsArray = [...cardSymbols, ...cardSymbols]; // Duplicate for pairs\n            \n            let flippedCards = [];\n            let matchesFound = 0;\n            let moves = 0;\n            let lockBoard = false;\n\n            // --- Utility Functions ---\n\n            function shuffle(array) {\n                for (let i = array.length - 1; i > 0; i--) {\n                    const j = Math.floor(Math.random() * (i + 1));\n                    [array[i], array[j]] = [array[j], array[i]];\n                }\n                return array;\n            }\n\n            function updateStats() {\n                statsDisplay.textContent = `Moves: ${moves}`;\n            }\n\n            // --- Game Logic ---\n\n            function createBoard() {\n                // Shuffle the cards\n                cardsArray = shuffle(cardsArray);\n                gameContainer.innerHTML = ''; // Clear previous board\n\n                cardsArray.forEach((symbol, index) => {\n                    const card = document.createElement('div');\n                    card.classList.add('card');\n                    card.dataset.symbol = symbol;\n                    card.dataset.index = index;\n                    card.addEventListener('click', () => handleCardClick(card));\n\n                    card.innerHTML = `\n                        <div class=\"card-face card-front\">${symbol}</div>\n                        <div class=\"card-face card-back\">?</div>\n                    `;\n                    gameContainer.appendChild(card);\n                });\n            }\n\n            function handleCardClick(card) {\n                // Ignore clicks if the board is locked or the card is already flipped/matched\n                if (lockBoard || card.classList.contains('flipped') || card.classList.contains('matched')) {\n                    return;\n                }\n\n                // Flip the card\n                card.classList.add('flipped');\n                flippedCards.push(card);\n\n                if (flippedCards.length === 2) {\n                    lockBoard = true;\n                    moves++;\n                    updateStats();\n\n                    const [card1, card2] = flippedCards;\n\n                    if (card1.dataset.symbol === card2.dataset.symbol) {\n                        // Match found!\n                        card1.classList.add('matched');\n                        card2.classL",
+      "html_length": 6082,
+      "reasoning_length": 2396,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Memory Card Game'"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_event_listener",
+          "passed": true,
+          "detail": "Event listener(s) present"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (4 pairs)"
+        },
+        {
+          "check": "has_style_or_css_link",
+          "passed": true,
+          "detail": "CSS present (style tag or stylesheet link)"
+        }
+      ],
+      "check_results": {
+        "passed": 10,
+        "failed": 0,
+        "total": 10
+      },
+      "timing": {
+        "elapsed": 61.35817098617554,
+        "completion_tokens": 2066,
+        "prompt_tokens": 73
+      }
+    },
+    {
+      "id": "game-tic-tac-toe",
+      "category": "game",
+      "difficulty": "medium",
+      "prompt": "Create an HTML5 Tic-Tac-Toe game. Use a 3x3 grid of buttons or divs. Players alternate clicking cells. JavaScript checks for a winner after each move. Display whose turn it is. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Tic-Tac-Toe</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            justify-content: center;\n            min-height: 100vh;\n            background-color: #f4f4f9;\n        }\n\n        h1 {\n            color: #333;\n            margin-bottom: 20px;\n        }\n\n        #status {\n            margin-bottom: 20px;\n            font-size: 1.5em;\n            font-weight: bold;\n            color: #007bff;\n        }\n\n        #game-board {\n            display: grid;\n            grid-template-columns: repeat(3, 100px);\n            grid-template-rows: repeat(3, 100px);\n            gap: 10px;\n            background-color: #333;\n            padding: 10px;\n            border-radius: 10px;\n        }\n\n        .cell {\n            background-color: #fff;\n            border: 2px solid #ccc;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            font-size: 3em;\n            cursor: pointer;\n            transition: background-color 0.2s;\n            border-radius: 5px;\n        }\n\n        .cell:hover {\n            background-color: #e0e0e0;\n        }\n\n        .cell:empty:hover {\n            background-color: #e0e0e0;\n        }\n\n        .cell.X {\n            color: #e74c3c; /* Red for X */\n        }\n\n        .cell.O {\n            color: #2ecc71; /* Green for O */\n        }\n    </style>\n</head>\n<body>\n\n    <h1>Tic-Tac-Toe</h1>\n    <div id=\"status\">Player X's turn</div>\n\n    <div id=\"game-board\">\n        <!-- Cells will be dynamically populated or defined here -->\n        <div class=\"cell\" data-index=\"0\"></div>\n        <div class=\"cell\" data-index=\"1\"></div>\n        <div class=\"cell\" data-index=\"2\"></div>\n        <div class=\"cell\" data-index=\"3\"></div>\n        <div class=\"cell\" data-index=\"4\"></div>\n        <div class=\"cell\" data-index=\"5\"></div>\n        <div class=\"cell\" data-index=\"6\"></div>\n        <div class=\"cell\" data-index=\"7\"></div>\n        <div class=\"cell\" data-index=\"8\"></div>\n    </div>\n\n    <script>\n        const cells = document.querySelectorAll('.cell');\n        const statusDisplay = document.getElementById('status');\n        let gameActive = true;\n        let currentPlayer = 'X';\n        let gameState = ['', '', '', '', '', '', '', '', ''];\n\n        const winningConditions = [\n            [0, 1, 2],\n            [3, 4, 5],\n            [6, 7, 8],\n            [0, 3, 6],\n            [1, 4, 7],\n            [2, 5, 8],\n            [0, 4, 8],\n            [2, 4, 6]\n        ];\n\n        // --- Game Functions ---\n\n        function handleCellPlayed(clickedCell, clickedCellIndex) {\n            gameState[clickedCellIndex] = currentPlayer;\n            clickedCell.innerHTML = currentPlayer;\n            clickedCell.classList.add(currentPlayer); // Add class for styling\n        }\n\n        function handlePlayerChange() {\n            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';\n            statusDisplay.innerHTML = `Player ${currentPlayer}'s turn`;\n        }\n\n        function handleResultValidation() {\n            let roundWon = false;\n            for (let i = 0; i < winningConditions.length; i++) {\n                const winCondition = winningConditions[i];\n                let a = gameState[winCondition[0]];\n                let b = gameState[winCondition[1]];\n                let c = gameState[winCondition[2]];\n\n                if (a === '' || b === '' || c === '') {\n                    continue; // Skip if any cell is empty\n                }\n                if (a === b && b === c) {\n                    roundWon = true;\n                    break;\n                }\n            }\n\n            if (roundWon) {\n                statusDisplay.innerHTML = `Player ${currentPlayer} has won!`;\n                gameActive = false;\n                return;\n            }\n\n            // Check for Draw\n            let roundDraw = !gameState.includes('');\n            if (roundDraw) {\n                statusDisplay.innerHTML = 'Game ended in a Draw!';\n                gameActive = false;\n                return;\n            }\n\n            handlePlayerChange();\n        }\n\n        function handleCellClick(event) {\n            const clickedCell = event.target;\n            const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));\n\n            // Check if the cell has already been played\n            if (gameState[clickedCellIndex] !== '' || !gameActive) {\n                return;\n            }\n\n            handleCellPlayed(clickedCell, clickedCellIndex);\n            handleResultValidation();\n        }\n\n        // --- Event Listener Setup ---\n\n        cells.forEach(cell => {\n            cell.addEventListener('click', handleCellClick);\n        });\n\n    </script>\n\n</body>\n</html>\n```",
+      "html_length": 4970,
+      "reasoning_length": 2154,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Tic-Tac-Toe'"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_event_listener",
+          "passed": true,
+          "detail": "Event listener(s) present"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (11 pairs)"
+        }
+      ],
+      "check_results": {
+        "passed": 9,
+        "failed": 0,
+        "total": 9
+      },
+      "timing": {
+        "elapsed": 55.78732419013977,
+        "completion_tokens": 1894,
+        "prompt_tokens": 64
+      }
+    },
+    {
+      "id": "game-whack-a-mole",
+      "category": "game",
+      "difficulty": "medium",
+      "prompt": "Create an HTML5 Whack-a-Mole game. Use a grid of holes (div elements). A mole randomly appears in one hole. The player clicks to whack it and score points. Use setInterval to spawn moles. Track the score. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Whack-a-Mole</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            background-color: #f0f0f0;\n            padding-top: 20px;\n        }\n\n        h1 {\n            color: #333;\n        }\n\n        #score-board {\n            margin-bottom: 20px;\n            font-size: 1.5em;\n            font-weight: bold;\n            color: #28a745;\n        }\n\n        #game-board {\n            display: grid;\n            grid-template-columns: repeat(3, 100px);\n            grid-template-rows: repeat(3, 100px);\n            gap: 10px;\n            padding: 20px;\n            background-color: #8b4513; /* Dirt color */\n            border-radius: 10px;\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        }\n\n        .hole {\n            width: 100px;\n            height: 100px;\n            background-color: #a0522d; /* Hole color */\n            border-radius: 50%;\n            cursor: url('mole.cur'), pointer; /* Custom cursor for interaction */\n            position: relative;\n            overflow: hidden;\n            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);\n        }\n\n        .mole {\n            width: 100%;\n            height: 100%;\n            background-color: #5c3a21; /* Mole color */\n            border-radius: 50%;\n            position: absolute;\n            bottom: -100%; /* Start hidden below the hole */\n            transition: bottom 0.2s ease-in-out;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            font-size: 30px;\n            color: white;\n        }\n\n        .mole.up {\n            bottom: 0; /* Mole is visible */\n        }\n\n        #start-button {\n            padding: 10px 20px;\n            font-size: 1.2em;\n            cursor: pointer;\n            background-color: #007bff;\n            color: white;\n            border: none;\n            border-radius: 5px;\n            margin-top: 20px;\n        }\n\n        #start-button:hover {\n            background-color: #0056b3;\n        }\n    </style>\n</head>\n<body>\n\n    <h1>Whack-a-Mole!</h1>\n    <div id=\"score-board\">Score: 0</div>\n\n    <button id=\"start-button\">Start Game</button>\n\n    <div id=\"game-board\">\n        <!-- Holes will be generated by JavaScript -->\n    </div>\n\n    <script>\n        const holes = document.querySelectorAll('.hole');\n        const scoreDisplay = document.getElementById('score-board');\n        const startButton = document.getElementById('start-button');\n\n        let score = 0;\n        let gameInterval;\n        let moleTimer;\n        let isGameRunning = false;\n\n        // --- Game Setup ---\n\n        function createHoles() {\n            const board = document.getElementById('game-board');\n            for (let i = 0; i < 9; i++) {\n                const hole = document.createElement('div');\n                hole.classList.add('hole');\n                hole.dataset.index = i;\n                hole.addEventListener('click', whack);\n                board.appendChild(hole);\n            }\n        }\n\n        // --- Game Logic ---\n\n        function updateScore(points) {\n            score += points;\n            scoreDisplay.textContent = `Score: ${score}`;\n        }\n\n        function randomHole() {\n            const index = Math.floor(Math.random() * holes.length);\n            return holes[index];\n        }\n\n        function spawnMole() {\n            if (!isGameRunning) return;\n\n            const hole = randomHole();\n            // Make the mole visible\n            hole.querySelector('.mole').classList.add('up');\n\n            // Hide the mole after a short delay\n            setTimeout(() => {\n                hole.querySelector('.mole').classList.remove('up');\n            }, 800); // Mole stays up for 0.8 seconds\n        }\n\n        function whack(e) {\n            if (!isGameRunning) return;\n\n            const clickedHole = e.target.closest('.hole');\n            if (clickedHole) {\n                const mole = clickedHole.querySelector('.mole');\n                \n                // Check if the mole is currently up before scoring\n                if (mole.classList.contains('up')) {\n                    updateScore(1);\n                    // Immediately hide the mole after a successful whack\n                    mole.classList.remove('up');\n                }\n            }\n        }\n\n        function startGame() {\n            if (isGameRunning) return;\n\n            score = 0;\n            updateScore(0);\n            isGameRunning = true;\n            startButton.style.display = 'none';\n\n            // Start spawning moles every 1 second\n            gameInterval = setInterval(spawnMole, 1000);\n        }\n\n        function endGame() {\n            isGameRunning = false;\n            clearInterval(gameInterval);\n            alert(`Ga",
+      "html_length": 5306,
+      "reasoning_length": 1870,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Whack-a-Mole'"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_event_listener",
+          "passed": true,
+          "detail": "Event listener(s) present"
+        },
+        {
+          "check": "has_score_variable",
+          "passed": true,
+          "detail": "Score variable found in game code"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (2 pairs)"
+        }
+      ],
+      "check_results": {
+        "passed": 10,
+        "failed": 0,
+        "total": 10
+      },
+      "timing": {
+        "elapsed": 55.716007232666016,
+        "completion_tokens": 1919,
+        "prompt_tokens": 70
+      }
+    },
+    {
+      "id": "game-reaction-time",
+      "category": "game",
+      "difficulty": "easy",
+      "prompt": "Create an HTML5 reaction time game. A colored box appears on screen after a random delay. The player clicks it as fast as possible. Display their reaction time in milliseconds. Use JavaScript and addEventListener. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Reaction Time Game</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            justify-content: center;\n            min-height: 100vh;\n            margin: 0;\n            background-color: #f4f4f9;\n        }\n\n        #game-container {\n            background: white;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);\n            text-align: center;\n            width: 90%;\n            max-width: 600px;\n        }\n\n        #reaction-box {\n            width: 200px;\n            height: 200px;\n            background-color: #3498db; /* Initial color (Blue) */\n            border-radius: 15px;\n            margin: 30px auto;\n            cursor: pointer;\n            transition: background-color 0.3s, transform 0.1s;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            color: white;\n            font-size: 1.2em;\n            font-weight: bold;\n            user-select: none;\n        }\n\n        #reaction-box:hover {\n            transform: scale(1.05);\n        }\n\n        .ready {\n            background-color: #2ecc71 !important; /* Green when ready */\n        }\n\n        #result {\n            margin-top: 20px;\n            font-size: 1.5em;\n            color: #333;\n            min-height: 30px;\n        }\n\n        button {\n            padding: 10px 20px;\n            font-size: 1em;\n            cursor: pointer;\n            background-color: #e74c3c;\n            color: white;\n            border: none;\n            border-radius: 5px;\n            margin-top: 15px;\n        }\n    </style>\n</head>\n<body>\n\n    <div id=\"game-container\">\n        <h1>Reaction Time Challenge</h1>\n        <p>Click the box as fast as you can!</p>\n\n        <div id=\"reaction-box\">\n            Click to Start\n        </div>\n\n        <div id=\"result\">\n            Waiting for the game to start...\n        </div>\n\n        <button id=\"startButton\" onclick=\"startGame()\">Start New Round</button>\n    </div>\n\n    <script>\n        const reactionBox = document.getElementById('reaction-box');\n        const resultDisplay = document.getElementById('result');\n        const startButton = document.getElementById('startButton');\n\n        let timeoutId = null;\n        let startTime = null;\n        let isTargetVisible = false;\n\n        /**\n         * Generates a random delay between 1 and 3 seconds (1000ms to 3000ms).\n         * @returns {number} The random delay in milliseconds.\n         */\n        function getRandomDelay() {\n            return Math.random() * 2000 + 1000; // 1000ms to 3000ms\n        }\n\n        /**\n         * Starts a new round of the reaction time game.\n         */\n        function startGame() {\n            // Reset state\n            clearTimeout(timeoutId);\n            isTargetVisible = false;\n            reactionBox.classList.remove('ready');\n            resultDisplay.textContent = 'Waiting for the target...';\n            reactionBox.textContent = 'Click to Start';\n            startButton.disabled = true;\n\n            // Set up the target appearance\n            const delay = getRandomDelay();\n            \n            // Set the timeout to make the box visible\n            timeoutId = setTimeout(() => {\n                showTarget();\n            }, delay);\n        }\n\n        /**\n         * Makes the reaction box visible and starts the timer.\n         */\n        function showTarget() {\n            isTargetVisible = true;\n            reactionBox.classList.add('ready');\n            reactionBox.textContent = 'CLICK NOW!';\n            \n            // Record the exact time the target appeared\n            startTime = performance.now();\n        }\n\n        /**\n         * Handles the click event on the reaction box.\n         * @param {Event} event \n         */\n        reactionBox.addEventListener('click', function() {\n            if (!isTargetVisible) {\n                // Ignore clicks if the target hasn't appeared yet\n                return;\n            }\n\n            // Record the time the player clicked\n            const endTime = performance.now();\n            \n            // Calculate reaction time\n            const reactionTime = endTime - startTime;\n\n            // Display the result\n            resultDisplay.innerHTML = `<strong>Reaction Time: ${reactionTime.toFixed(2)} ms</strong>`;\n            \n            // Reset the box appearance\n            reactionBox.classList.remove('ready');\n            reactionBox.textContent = 'Click to Start';\n            startButton.disabled = false;\n            isTargetVisible = false;\n        });\n\n    </script>\n\n</body>\n</html>\n```",
+      "html_length": 4896,
+      "reasoning_length": 2544,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Reaction Time Game'"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_event_listener",
+          "passed": true,
+          "detail": "Event listener(s) present"
+        },
+        {
+          "check": "has_color_styling",
+          "passed": true,
+          "detail": "Color styling present"
+        },
+        {
+          "check": "div_balanced",
+          "passed": true,
+          "detail": "<div> balanced (3 pairs)"
+        }
+      ],
+      "check_results": {
+        "passed": 9,
+        "failed": 0,
+        "total": 9
+      },
+      "timing": {
+        "elapsed": 56.456319093704224,
+        "completion_tokens": 1912,
+        "prompt_tokens": 62
+      }
+    },
+    {
+      "id": "game-paddle-pong",
+      "category": "game",
+      "difficulty": "hard",
+      "prompt": "Create a simple Pong game on HTML5 canvas. Two paddles (left controlled by W/S keys, right by arrow keys). A ball bounces between them. Score points when the ball passes a paddle. Use requestAnimationFrame. Return only the HTML.",
+      "html_output": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Simple Pong</title>\n    <style>\n        body {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            min-height: 100vh;\n            margin: 0;\n            background-color: #222;\n            font-family: Arial, sans-serif;\n        }\n        canvas {\n            border: 2px solid white;\n            background-color: #000;\n        }\n    </style>\n</head>\n<body>\n    <canvas id=\"pongCanvas\" width=\"600\" height=\"400\"></canvas>\n\n    <script>\n        const canvas = document.getElementById('pongCanvas');\n        const ctx = canvas.getContext('2d');\n\n        // Game Constants\n        const GAME_WIDTH = canvas.width;\n        const GAME_HEIGHT = canvas.height;\n\n        // Paddle properties\n        const paddleWidth = 10;\n        const paddleHeight = 80;\n        const paddleSpeed = 6;\n\n        // Ball properties\n        let ball = {\n            x: GAME_WIDTH / 2,\n            y: GAME_HEIGHT / 2,\n            radius: 7,\n            dx: 4, // velocity x\n            dy: 4  // velocity y\n        };\n\n        // Paddle properties\n        let leftPaddle = {\n            x: 10,\n            y: GAME_HEIGHT / 2 - paddleHeight / 2,\n            width: paddleWidth,\n            height: paddleHeight,\n            score: 0\n        };\n\n        let rightPaddle = {\n            x: GAME_WIDTH - paddleWidth - 10,\n            y: GAME_HEIGHT / 2 - paddleHeight / 2,\n            width: paddleWidth,\n            height: paddleHeight,\n            score: 0\n        };\n\n        // Input tracking\n        let keys = {\n            w: false,\n            s: false,\n            ArrowLeft: false,\n            ArrowRight: false\n        };\n\n        // --- Input Handlers ---\n        document.addEventListener('keydown', (e) => {\n            if (e.key === 'w') keys.w = true;\n            if (e.key === 's') keys.s = true;\n            if (e.key === 'ArrowLeft') keys.ArrowLeft = true;\n            if (e.key === 'ArrowRight') keys.ArrowRight = true;\n        });\n\n        document.addEventListener('keyup', (e) => {\n            if (e.key === 'w') keys.w = false;\n            if (e.key === 's') keys.s = false;\n            if (e.key === 'ArrowLeft') keys.ArrowLeft = false;\n            if (e.key === 'ArrowRight') keys.ArrowRight = false;\n        });\n\n        // --- Drawing Functions ---\n\n        function drawPaddle(paddle) {\n            ctx.fillStyle = 'white';\n            ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);\n        }\n\n        function drawBall() {\n            ctx.beginPath();\n            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);\n            ctx.fillStyle = 'red';\n            ctx.fill();\n            ctx.closePath();\n        }\n\n        function drawScore() {\n            ctx.font = '20px Arial';\n            ctx.fillStyle = 'white';\n            ctx.fillText(`Player 1 Score: ${leftPaddle.score}`, 10, 30);\n            ctx.fillText(`Player 2 Score: ${rightPaddle.score}`, GAME_WIDTH - 200, 30);\n        }\n\n        // --- Update Logic ---\n\n        function updatePaddles() {\n            // Left Paddle (W/S)\n            if (keys.w) {\n                leftPaddle.y -= paddleSpeed;\n            }\n            if (keys.s) {\n                leftPaddle.y += paddleSpeed;\n            }\n\n            // Keep left paddle within bounds\n            if (leftPaddle.y < 0) leftPaddle.y = 0;\n            if (leftPaddle.y + paddleHeight > GAME_HEIGHT) leftPaddle.y = GAME_HEIGHT - paddleHeight;\n\n\n            // Right Paddle (Arrow Keys)\n            if (keys.ArrowLeft) {\n                rightPaddle.x -= paddleSpeed;\n            }\n            if (keys.ArrowRight) {\n                rightPaddle.x += paddleSpeed;\n            }\n\n            // Keep right paddle within bounds\n            if (rightPaddle.x < 0) rightPaddle.x = 0;\n            if (rightPaddle.x + paddleWidth > GAME_WIDTH) rightPaddle.x = GAME_WIDTH - paddleWidth;\n        }\n\n        function updateBall() {\n            ball.x += ball.dx;\n            ball.y += ball.dy;\n\n            // Wall collision (Top/Bottom)\n            if (ball.y - ball.radius < 0 || ball.y + ball.radius > GAME_HEIGHT) {\n                ball.dy = -ball.dy;\n            }\n\n            // Paddle collision (Left Paddle)\n            if (ball.x - ball.radius < leftPaddle.x + paddleWidth &&\n                ball.y > leftPaddle.y &&\n                ball.y < leftPaddle.y + leftPaddle.height) {\n                \n                ball.dx = -ball.dx;\n                // Add slight vertical deflection based on where it hits the paddle\n                let hitPoint = (ball.y - (leftPaddle.y + leftPaddle.height / 2));\n                ball.dy = hitPoint * 0.15; \n            }\n\n            // Paddle collision (Right Paddle)\n            if (ball.x + ball.radius > rightPaddle.x &&\n                ball.y > rightPaddle.y &&\n                ball.y < rightPaddle.y + ri",
+      "html_length": 6474,
+      "reasoning_length": 2410,
+      "checks": [
+        {
+          "check": "has_doctype",
+          "passed": true,
+          "detail": "DOCTYPE present"
+        },
+        {
+          "check": "has_html_tags",
+          "passed": true,
+          "detail": "<html> tags present"
+        },
+        {
+          "check": "has_head_body",
+          "passed": true,
+          "detail": "<head> and <body> present"
+        },
+        {
+          "check": "has_title",
+          "passed": true,
+          "detail": "Title: 'Simple Pong'"
+        },
+        {
+          "check": "has_canvas",
+          "passed": true,
+          "detail": "<canvas> with id attribute present"
+        },
+        {
+          "check": "has_script_tag",
+          "passed": true,
+          "detail": "<script> tag present"
+        },
+        {
+          "check": "has_script_closing",
+          "passed": true,
+          "detail": "</script> present"
+        },
+        {
+          "check": "has_get_context",
+          "passed": true,
+          "detail": "canvas.getContext('2d') present"
+        },
+        {
+          "check": "has_keydown_listener",
+          "passed": true,
+          "detail": "keydown event listener present"
+        },
+        {
+          "check": "has_score_variable",
+          "passed": true,
+          "detail": "Score variable found in game code"
+        },
+        {
+          "check": "has_request_animation_frame",
+          "passed": true,
+          "detail": "requestAnimationFrame present (game loop)"
+        },
+        {
+          "check": "has_clear_rect",
+          "passed": true,
+          "detail": "clearRect() present (canvas cleared each frame)"
+        },
+        {
+          "check": "has_collision_or_boundary",
+          "passed": true,
+          "detail": "Collision/boundary handling present"
+        }
+      ],
+      "check_results": {
+        "passed": 13,
+        "failed": 0,
+        "total": 13
+      },
+      "timing": {
+        "elapsed": 66.95268535614014,
+        "completion_tokens": 2398,
+        "prompt_tokens": 66
+      }
+    }
+  ],
+  "errors": [
+    {
+      "check": "has_color_styling",
+      "count": 3,
+      "affected_prompts": [
+        "profile-contact-form",
+        "profile-basic",
+        "profile-skills-list"
+      ],
+      "details": [
+        {
+          "prompt_id": "profile-basic",
+          "category": "profile",
+          "detail": "No color styling found (page/game will be unstyled)"
+        },
+        {
+          "prompt_id": "profile-contact-form",
+          "category": "profile",
+          "detail": "No color styling found (page/game will be unstyled)"
+        },
+        {
+          "prompt_id": "profile-skills-list",
+          "category": "profile",
+          "detail": "No color styling found (page/game will be unstyled)"
+        }
+      ]
+    },
+    {
+      "check": "has_nav_tag",
+      "count": 1,
+      "affected_prompts": [
+        "profile-social-links"
+      ],
+      "details": [
+        {
+          "prompt_id": "profile-social-links",
+          "category": "profile",
+          "detail": "Missing <nav> semantic tag (expected in profile pages)"
+        }
+      ]
+    },
+    {
+      "check": "has_doctype",
+      "count": 1,
+      "affected_prompts": [
+        "profile-styled-card"
+      ],
+      "details": [
+        {
+          "prompt_id": "profile-styled-card",
+          "category": "profile",
+          "detail": "Missing <!DOCTYPE html>"
+        }
+      ]
+    },
+    {
+      "check": "has_html_tags",
+      "count": 1,
+      "affected_prompts": [
+        "profile-styled-card"
+      ],
+      "details": [
+        {
+          "prompt_id": "profile-styled-card",
+          "category": "profile",
+          "detail": "Missing <html> tags (open=False, close=False)"
+        }
+      ]
+    },
+    {
+      "check": "has_head_body",
+      "count": 1,
+      "affected_prompts": [
+        "profile-styled-card"
+      ],
+      "details": [
+        {
+          "prompt_id": "profile-styled-card",
+          "category": "profile",
+          "detail": "Missing head/body (head=False, body=False)"
+        }
+      ]
+    },
+    {
+      "check": "has_title",
+      "count": 1,
+      "affected_prompts": [
+        "profile-styled-card"
+      ],
+      "details": [
+        {
+          "prompt_id": "profile-styled-card",
+          "category": "profile",
+          "detail": "Missing or empty <title> tag"
+        }
+      ]
+    },
+    {
+      "check": "has_h1",
+      "count": 1,
+      "affected_prompts": [
+        "profile-styled-card"
+      ],
+      "details": [
+        {
+          "prompt_id": "profile-styled-card",
+          "category": "profile",
+          "detail": "Missing <h1> tag (page should have one main heading)"
+        }
+      ]
+    },
+    {
+      "check": "tags_balanced",
+      "count": 1,
+      "affected_prompts": [
+        "profile-table-schedule"
+      ],
+      "details": [
+        {
+          "prompt_id": "profile-table-schedule",
+          "category": "profile",
+          "detail": "Check error: _tags_balanced() missing 1 required positional argument: 'tag'"
+        }
+      ]
+    },
+    {
+      "check": "has_clear_rect",
+      "count": 1,
+      "affected_prompts": [
+        "game-snake-clone"
+      ],
+      "details": [
+        {
+          "prompt_id": "game-snake-clone",
+          "category": "game",
+          "detail": "No clearRect() found (canvas will have motion trails)"
+        }
+      ]
+    }
+  ]
+}

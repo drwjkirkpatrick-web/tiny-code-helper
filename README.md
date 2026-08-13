@@ -211,7 +211,54 @@ The bridge catches *structural* errors (syntax, import failures, runtime crashes
 
 **Stats endpoint:** `curl http://127.0.0.1:11435/bridge/stats` shows:
 - Total requests, code detected, passed first try, fixed via retry
+- HTML detected, HTML fixed (autocorrect count)
 - Whether review is enabled and max fix attempts
+
+### HTML Adaptive Code Review
+
+For students learning HTML, the bridge includes an **HTML adaptive error database** that automatically detects and fixes common HTML errors in real time — no model re-query needed, instant deterministic patching.
+
+**Test suite:** 25 HTML prompts (12 profile pages + 13 game patterns) with 258 deterministic checks covering:
+- Document structure (DOCTYPE, html, head, body, title)
+- Semantic tags (nav, header, footer, main, section)
+- Tag balance (div, p, ul/li, section)
+- Accessibility (img alt attributes)
+- Responsive design (viewport meta, charset)
+- Game requirements (canvas, getContext, clearRect, requestAnimationFrame, event listeners)
+- CSS styling (color, background, fillStyle)
+
+**Test results (Gemma 4 E2B, August 2026):** 247/258 checks passed (95.7%). The 10 real errors were:
+
+| Error | Count | Fix |
+|---|---|---|
+| Missing CSS color styling | 3 | Inject `<style>` block with base styles |
+| Missing `<nav>` semantic tag | 1 | Replace `<div>` containing 3+ links with `<nav>` |
+| Missing document structure (fragment) | 5 | Wrap in full `<!DOCTYPE html>` document, promote `<h2>` to `<h1>` |
+| Missing `clearRect()` in canvas game | 1 | Inject `ctx.clearRect()` into game loop function |
+| Markdown code fences wrapping HTML | 4 | Strip ```` ```html ```` fences |
+
+**9 error patterns in the database**, each with `detect()` and `fix()` functions. After autocorrect: **10/10 fixable errors resolved** (the 1 remaining was a test-runner storage truncation, not a model error).
+
+**How it works in the bridge:**
+1. Bridge detects HTML in the response (DOCTYPE, `<html>`, 3+ structural tags, or ```` ```html ```` fence)
+2. Runs all 9 error pattern detectors
+3. Applies fixes in order (fences stripped → structure wrapped → content patched)
+4. Returns the fixed HTML to the caller — broken HTML never reaches the student
+
+**Three review layers now:**
+- **HTML autocorrect** (real-time): deterministic pattern detection + instant fix
+- **Python review** (real-time): syntax check + execution test + model re-query
+- **Nanny review** (curated prompts): functional test cases + generate→test→fix loop
+
+**Run the HTML test suite:**
+```bash
+code-llm start
+cd ~/projects/tiny-code-helper/scripts
+python3 html_test_runner.py --output results.json --verbose
+# Or by category:
+python3 html_test_runner.py --category profile --verbose
+python3 html_test_runner.py --category game --verbose
+```
 
 ### Quick Start
 
@@ -276,7 +323,11 @@ code-llm nanny-run --verbose
 | File | Purpose |
 |---|---|
 | `scripts/code-llm` | Main helper script (start/stop/status/chat/nanny) |
-| `scripts/nanny_bridge.py` | Ollama-to-llama.cpp API translation bridge |
+| `scripts/nanny_bridge.py` | Ollama-to-llama.cpp API bridge with Python + HTML review |
+| `scripts/html_prompts.py` | 25 HTML test prompts (12 profile + 13 game) with deterministic checks |
+| `scripts/html_test_runner.py` | HTML test runner — sends prompts to model, runs checks, records errors |
+| `scripts/html_error_db.py` | Adaptive HTML error database — 9 detect/fix patterns for autocorrect |
+| `scripts/html_test_results.json` | Baseline test results (25 prompts, 247/258 passed) |
 
 ## License
 

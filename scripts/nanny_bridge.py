@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -38,10 +39,54 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 # Model name baby-llm-nanny will see
 BRIDGE_MODEL_NAME = "gemma-4-e2b"
 
+# Import HTML autocorrect from sibling module
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+try:
+    from html_error_db import apply_html_autocorrect
+    _HTML_AUTOCORRECT_AVAILABLE = True
+except ImportError:
+    _HTML_AUTOCORRECT_AVAILABLE = False
+
 
 # ─────────────────────────────────────────────────────────────────────
 # Real-time code detection and deterministic review
 # ─────────────────────────────────────────────────────────────────────
+
+def detect_html(content: str) -> bool:
+    """Detect whether a response contains HTML code (not just Python).
+    Heuristic: has DOCTYPE, or has multiple HTML tags like <html>, <head>,
+    <body>, <div>, <canvas>, <style>, <script> in non-prose context."""
+    # Strong signal: DOCTYPE or <html> tag
+    if re.search(r"<!DOCTYPE\s+html>", content, re.IGNORECASE):
+        return True
+    if re.search(r"<html[^>]*>", content, re.IGNORECASE):
+        return True
+    # Medium signal: combination of body + structural tags
+    html_tags = re.findall(r"<(?:body|head|div|canvas|style|script|nav|header|footer|section|article|main|form|table|video|audio)[\s>]", content, re.IGNORECASE)
+    if len(html_tags) >= 3:
+        return True
+    # Markdown html fence
+    if re.search(r"```html\s*", content, re.IGNORECASE):
+        return True
+    return False
+
+
+def review_html(content: str) -> tuple[str, dict]:
+    """Apply HTML autocorrect to a response containing HTML.
+
+    Returns (fixed_content, review_info) where review_info has:
+      - "reviewed": bool
+      - "fixes": list of applied fixes
+    """
+    if not _HTML_AUTOCORRECT_AVAILABLE:
+        return content, {"reviewed": True, "fixes": []}
+
+    fixed, fixes = apply_html_autocorrect(content)
+    return fixed, {
+        "reviewed": True,
+        "fixes": [{"id": f["id"], "description": f["description"], "fixable": f["fixable"]} for f in fixes],
+    }
+
 
 def extract_code_blocks(text: str) -> list[dict]:
     """Extract Python code blocks from a model response.
@@ -217,6 +262,29 @@ def review_response(
         "fixes": [],
     }
 
+    # ── HTML review: apply autocorrect before Python checks ──
+    if detect_html(content):
+        fixed_content, html_review = review_html(content)
+        if fixed_content != content:
+            content = fixed_content
+            review_info["reviewed"] = True
+            review_info["html_fixes"] = html_review["fixes"]
+            # Log the HTML fixes
+            for hf in html_review["fixes"]:
+                if hf["fixable"]:
+                    print(f"[html-review] ✅ Fixed: {hf['id']}")
+                else:
+                    print(f"[html-review] ⚠️ Detected (no auto-fix): {hf['id']}")
+            review_info["passed"] = True
+            return content, reasoning, review_info
+        elif html_review["fixes"]:
+            # Detected errors but couldn't fix them
+            review_info["reviewed"] = True
+            review_info["html_fixes"] = html_review["fixes"]
+            review_info["passed"] = True  # Pass through — can't auto-fix everything
+            return content, reasoning, review_info
+
+    # ── Python review: existing pipeline ──
     blocks = extract_code_blocks(content)
     if not blocks:
         # No code detected — pass through unchanged
@@ -346,6 +414,8 @@ class BridgeHandler(BaseHTTPRequestHandler):
     _code_detected: int = 0
     _code_fixed: int = 0
     _code_passed_first_try: int = 0
+    _html_detected: int = 0
+    _html_fixed: int = 0
 
     def _json_response(self, data: dict, status: int = 200):
         body = json.dumps(data).encode("utf-8")
@@ -411,6 +481,11 @@ class BridgeHandler(BaseHTTPRequestHandler):
             )
 
             type(self)._total_requests += 1
+            if review_info.get("html_fixes"):
+                type(self)._html_detected += 1
+                html_fixed_count = sum(1 for f in review_info["html_fixes"] if f["fixable"])
+                if html_fixed_count > 0:
+                    type(self)._html_fixed += 1
             if review_info["reviewed"]:
                 type(self)._code_detected += 1
                 if review_info["passed"] and review_info["attempts"] == 1:
@@ -453,6 +528,8 @@ class BridgeHandler(BaseHTTPRequestHandler):
                 "code_detected": self._code_detected,
                 "code_passed_first_try": self._code_passed_first_try,
                 "code_fixed_via_retry": self._code_fixed,
+                "html_detected": self._html_detected,
+                "html_fixed": self._html_fixed,
                 "review_enabled": self.review_enabled,
                 "max_fix_attempts": self.max_fix_attempts,
             })

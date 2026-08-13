@@ -177,6 +177,84 @@ Measured August 2026 on Jetson Orin Nano 8GB with `llama-bench` and `llama-serve
 
 MTP speculative decoding achieves 72% draft acceptance on code (vs 19% on prose). Use it for code generation and structured output only — for general chat, MTP hurts throughput.
 
+## Baby LLM Nanny Integration (Optional)
+
+**baby-llm-nanny** is a hallucination and quality screening tool for small local LLMs. It sends a curated bank of test prompts to your model and evaluates the responses against known-correct answers — catching hallucinations, bad math, logic errors, and instruction-following failures.
+
+The nanny was designed for Ollama's API, but `code-llm` uses llama.cpp. The included **`nanny_bridge.py`** translates between them:
+
+```
+baby-llm-nanny  →  Ollama API (/api/generate)  →  nanny_bridge.py  →  llama.cpp (/v1/chat/completions)
+                    port 11435                                          port 8080
+```
+
+The bridge strips Gemma 4 E2B's `reasoning_content` (thinking tokens) and passes only the final `content` through to the nanny — so screening measures actual answer quality, not thinking length.
+
+### Quick Start
+
+```bash
+# 1. Start the LLM server
+code-llm start
+
+# 2. Run the nanny (auto-starts the bridge)
+code-llm nanny
+
+# Or run with custom args:
+code-llm nanny-run --review --max-iterations 5
+code-llm nanny-run --categories math,reasoning
+code-llm nanny-run --verbose
+```
+
+### Nanny Commands
+
+| Command | What it does |
+|---|---|
+| `code-llm nanny` | Auto-start bridge + run `--review --max-iterations 3` |
+| `code-llm nanny-start` | Start just the Ollama-to-llama.cpp bridge |
+| `code-llm nanny-stop` | Stop the bridge |
+| `code-llm nanny-status` | Show bridge running state |
+| `code-llm nanny-run ARGS` | Run nanny with custom args (passes ARGS to baby-llm-nanny) |
+
+`code-llm stop` also stops the nanny bridge. `code-llm status` shows both.
+
+### What the Nanny Tests
+
+- **Live code review:** 9 built-in coding prompts (is-even, factorial, reverse-string, fizzbuzz, max-of-list, palindrome, count-vowels, binary-search, merge-sorted-lists). The nanny generates code, runs it against test cases in an isolated subprocess, and if tests fail, feeds specific error feedback back to the model for a retry — up to `--max-iterations` rounds.
+- **Hallucination screening:** Factual questions with known-correct answers to catch made-up facts.
+- **Math and logic:** Arithmetic and reasoning problems.
+- **Instruction following:** Does the model follow output format instructions?
+
+### Sample Results (August 2026, Gemma 4 E2B via llama.cpp)
+
+```
+🔬 Live Code Review Report — gemma-4-e2b
+  Prompts reviewed: 9
+  Final pass rate:  8/9
+  Self-corrected:   2 (went from failing → passing)
+
+  ✅ coding-is-even [1 iterations]        7.4s
+  ✅ coding-factorial [1 iterations]     15.2s
+  ✅ coding-reverse-string [1 iterations] 9.9s
+  ✅ coding-fizzbuzz [1 iterations]      18.8s
+  ✅ coding-max-of-list [2 iterations]   60.6s (self-corrected!)
+  ✅ coding-palindrome [1 iterations]    23.7s
+  ✅ coding-count-vowels [1 iterations]  19.3s
+  ✅ coding-binary-search [2 iterations] 62.4s (self-corrected!)
+  ❌ coding-merge-sorted-lists [2 iterations] — failed after 2 rounds
+```
+
+### Prerequisites
+
+- **baby-llm-nanny** installed at `~/projects/baby-llm-nanny/` ([repo](https://github.com/drwjkirkpatrick-web/baby-llm-nanny))
+- The LLM server must be running (`code-llm start`) before starting the nanny
+
+### Files
+
+| File | Purpose |
+|---|---|
+| `scripts/code-llm` | Main helper script (start/stop/status/chat/nanny) |
+| `scripts/nanny_bridge.py` | Ollama-to-llama.cpp API translation bridge |
+
 ## License
 
 MIT

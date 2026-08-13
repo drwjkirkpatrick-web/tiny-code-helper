@@ -1,18 +1,20 @@
+#!/usr/bin/env bash
 # code-llm: start/stop/status helper for llama.cpp + Gemma 4 E2B with MTP
 # Optimized for code generation on Jetson (42.7 tok/s benchmark).
-# Usage: code-llm start | stop | status | test | chat | log
-#
-# This is the canonical copy. Install to ~/bin/code-llm and chmod +x.
-# See README.md for full setup instructions.
+# Usage: code-llm start | stop | status | test | log
 
 set -euo pipefail
 
-LLAMA_BIN="${LLAMA_BIN:-$HOME/llama.cpp/build/bin/llama-server}"
-MODEL="${MODEL:-$HOME/models/gemma-4-E2B-it-Q4_K_M.gguf}"
-MTP_MODEL="${MTP_MODEL:-$HOME/models/gemma-4-e2b-mtp/mtp-gemma-4-E2B-it.gguf}"
+LLAMA_BIN="$HOME/llama.cpp/build/bin/llama-server"
+MODEL="$HOME/models/gemma-4-E2B-it-Q4_K_M.gguf"
+MTP_MODEL="$HOME/models/gemma-4-e2b-mtp/mtp-gemma-4-E2B-it.gguf"
 PIDFILE="/tmp/code-llm.pid"
-PORT="${PORT:-8080}"
-HOST="${HOST:-127.0.0.1}"
+NANNY_PIDFILE="/tmp/code-llm-nanny-bridge.pid"
+NANNY_SCRIPT="$HOME/projects/tiny-code-helper/scripts/nanny_bridge.py"
+NANNY_PROJECT="$HOME/projects/baby-llm-nanny"
+BRIDGE_PORT=11435
+PORT=8080
+HOST=127.0.0.1
 
 start() {
     if is_running; then
@@ -53,7 +55,6 @@ start() {
         if curl -s "http://$HOST:$PORT/health" | grep -q "ok" 2>/dev/null; then
             echo " ready!"
             echo "  Endpoint: http://$HOST:$PORT/v1/chat/completions"
-            echo "  Context: ${CTX:-4096} tokens"
             echo ""
             echo "  Example:"
             echo "    curl -s http://$HOST:$PORT/v1/chat/completions \\"
@@ -153,8 +154,7 @@ chat() {
         return 1
     fi
     echo "Interactive chat with Gemma 4 E2B (thinking model). Type 'exit' to quit."
-    echo "Add --think to see reasoning. Context resets each message."
-    echo ""
+    echo "Add --think to see reasoning. Context resets each message.\n"
 
     local show_think=false
     local sys_msg="You are a helpful coding assistant. Be concise and correct."
@@ -169,6 +169,7 @@ chat() {
         esac
     done
 
+    local history="[]"
     while true; do
         echo -n "> "
         read -r -e user_input
@@ -212,34 +213,140 @@ log() {
     fi
 }
 
+# ── Nanny (baby-llm-nanny) integration ──────────────────────────
+
+nanny_is_running() {
+    [ -f "$NANNY_PIDFILE" ] && kill -0 "$(cat "$NANNY_PIDFILE")" 2>/dev/null
+}
+
+nanny_status() {
+    if nanny_is_running; then
+        local pid=$(cat "$NANNY_PIDFILE")
+        echo "NANNY BRIDGE RUNNING  PID=$pid"
+        echo "  Ollama API: http://127.0.0.1:$BRIDGE_PORT"
+        echo "  -> llama.cpp: http://$HOST:$PORT"
+    else
+        echo "NANNY BRIDGE STOPPED"
+    fi
+}
+
+nanny_start() {
+    if ! is_running; then
+        echo "llama.cpp server not running. Start it first: code-llm start"
+        return 1
+    fi
+    if nanny_is_running; then
+        echo "Nanny bridge already running (PID $(cat "$NANNY_PIDFILE"))"
+        return 0
+    fi
+    if [ ! -f "$NANNY_SCRIPT" ]; then
+        echo "Bridge script not found at $NANNY_SCRIPT"
+        return 1
+    fi
+
+    echo "Starting nanny bridge (Ollama API -> llama.cpp)..."
+    python3 "$NANNY_SCRIPT" \
+        --llama-port "$PORT" \
+        --bridge-port "$BRIDGE_PORT" \
+        > /tmp/code-llm-nanny-bridge.log 2>&1 &
+
+    local pid=$!
+    echo "$pid" > "$NANNY_PIDFILE"
+
+    sleep 1
+    if nanny_is_running; then
+        echo "  PID: $pid"
+        echo "  Ollama API: http://127.0.0.1:$BRIDGE_PORT"
+        echo "  Model name: gemma-4-e2b"
+        echo ""
+        echo "  Run nanny from its project dir:"
+        echo "    cd $NANNY_PROJECT"
+        echo "    python3 -m baby_llm_nanny.cli gemma-4-e2b --host localhost --port $BRIDGE_PORT --review"
+    else
+        echo "  FAILED (check /tmp/code-llm-nanny-bridge.log)"
+        rm -f "$NANNY_PIDFILE"
+        return 1
+    fi
+}
+
+nanny_stop() {
+    if ! nanny_is_running; then
+        echo "Nanny bridge not running."
+        rm -f "$NANNY_PIDFILE"
+        return 0
+    fi
+    local pid=$(cat "$NANNY_PIDFILE")
+    echo "Stopping nanny bridge (PID $pid)..."
+    kill "$pid" 2>/dev/null || true
+    sleep 1
+    rm -f "$NANNY_PIDFILE"
+    echo "Stopped."
+}
+
+nanny_run() {
+    # Run baby-llm-nanny against the llama.cpp server via the bridge
+    if ! is_running; then
+        echo "llama.cpp server not running. Start it first: code-llm start"
+        return 1
+    fi
+    if ! nanny_is_running; then
+        nanny_start || return 1
+    fi
+
+    local nanny_args=("${@:-}")
+    if [ ${#nanny_args[@]} -eq 0 ]; then
+        nanny_args=(--review --max-iterations 3)
+    fi
+
+    echo "Running baby-llm-nanny: gemma-4-e2b ${nanny_args[*]}"
+    echo ""
+    cd "$NANNY_PROJECT"
+    python3 -m baby_llm_nanny.cli gemma-4-e2b \
+        --host localhost --port "$BRIDGE_PORT" \
+        "${nanny_args[@]}"
+}
+
 is_running() {
     [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null
 }
 
 case "${1:-}" in
     start)  start ;;
-    stop)   stop ;;
-    status) status ;;
+    stop)   stop; nanny_stop ;;
+    status) status; echo ""; nanny_status ;;
     test)   test_model ;;
     chat)   chat "${@:2}" ;;
     log)    log ;;
-    restart) stop; sleep 1; start ;;
+    restart) stop; nanny_stop; sleep 1; start ;;
+    # Nanny commands
+    nanny-start)  nanny_start ;;
+    nanny-stop)   nanny_stop ;;
+    nanny-status) nanny_status ;;
+    nanny-run)   nanny_run "${@:2}" ;;
+    nanny)       nanny_run "${@:2}" ;;
     *)
         echo "Usage: code-llm {start|stop|restart|status|test|chat|log}"
+        echo "       code-llm {nanny|nanny-start|nanny-stop|nanny-status|nanny-run}"
         echo ""
-        echo "  start   - Launch llama.cpp + Gemma 4 E2B with MTP (code-optimized)"
-        echo "  stop    - Stop the server"
-        echo "  restart - Stop then start"
-        echo "  status  - Show running state and memory usage"
-        echo "  test    - Run a code-gen test and show throughput"
-        echo "  chat    - Interactive coding chat (--think to see reasoning, --tokens N)"
-        echo "  log     - Tail the last 50 log lines"
+        echo "  LLM server:"
+        echo "    start   - Launch llama.cpp + Gemma 4 E2B with MTP (code-optimized)"
+        echo "    stop    - Stop the server (also stops nanny bridge)"
+        echo "    restart - Stop then start"
+        echo "    status  - Show running state and memory usage"
+        echo "    test    - Run a code-gen test and show throughput"
+        echo "    chat    - Interactive coding chat (--think to see reasoning, --tokens N)"
+        echo "    log     - Tail the last 50 log lines"
+        echo ""
+        echo "  Baby LLM Nanny (hallucination screening):"
+        echo "    nanny           - Auto-start bridge + run nanny --review (default)"
+        echo "    nanny-start     - Start the Ollama-to-llama.cpp bridge"
+        echo "    nanny-stop      - Stop the bridge"
+        echo "    nanny-status    - Show bridge state"
+        echo "    nanny-run ARGS  - Run nanny with custom args (passes ARGS to baby-llm-nanny)"
         echo ""
         echo "Env overrides:"
         echo "  CTX=8192 code-llm start   - Use larger context window (default 4096)"
-        echo "  PORT=8081 code-llm start   - Use different port"
-        echo "  LLAMA_BIN=/path/to/llama-server code-llm start  - Custom binary"
-        echo "  MODEL=/path/to/model.gguf code-llm start        - Custom model"
+        echo "  BRIDGE_PORT=11440 code-llm nanny  - Use different bridge port"
         exit 1
         ;;
 esac

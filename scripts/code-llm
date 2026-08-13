@@ -1,0 +1,245 @@
+# code-llm: start/stop/status helper for llama.cpp + Gemma 4 E2B with MTP
+# Optimized for code generation on Jetson (42.7 tok/s benchmark).
+# Usage: code-llm start | stop | status | test | chat | log
+#
+# This is the canonical copy. Install to ~/bin/code-llm and chmod +x.
+# See README.md for full setup instructions.
+
+set -euo pipefail
+
+LLAMA_BIN="${LLAMA_BIN:-$HOME/llama.cpp/build/bin/llama-server}"
+MODEL="${MODEL:-$HOME/models/gemma-4-E2B-it-Q4_K_M.gguf}"
+MTP_MODEL="${MTP_MODEL:-$HOME/models/gemma-4-e2b-mtp/mtp-gemma-4-E2B-it.gguf}"
+PIDFILE="/tmp/code-llm.pid"
+PORT="${PORT:-8080}"
+HOST="${HOST:-127.0.0.1}"
+
+start() {
+    if is_running; then
+        echo "Already running (PID $(cat "$PIDFILE"))"
+        return 0
+    fi
+
+    echo "Starting llama.cpp server (Gemma 4 E2B + MTP)..."
+
+    # Free GPU memory if Ollama is running
+    if pgrep -f "ollama serve" >/dev/null 2>&1; then
+        echo "  Stopping Ollama to free GPU/RAM..."
+        pkill -f "ollama serve"
+        sleep 2
+    fi
+
+    # Max clock speeds
+    sudo jetson_clocks 2>/dev/null || true
+
+    # Launch in background
+    "$LLAMA_BIN" \
+        -m "$MODEL" \
+        -md "$MTP_MODEL" \
+        -ngl 99 -ngld 99 \
+        --spec-type draft-mtp --spec-draft-n-max 4 \
+        -c "${CTX:-4096}" -t 6 \
+        --temp 1.0 --top-p 0.95 --top-k 64 \
+        --host "$HOST" --port "$PORT" \
+        > /tmp/code-llm.log 2>&1 &
+
+    local pid=$!
+    echo "$pid" > "$PIDFILE"
+    echo "  PID: $pid"
+
+    # Wait for server to be ready (up to 30s)
+    echo -n "  Waiting for server..."
+    for i in $(seq 1 15); do
+        if curl -s "http://$HOST:$PORT/health" | grep -q "ok" 2>/dev/null; then
+            echo " ready!"
+            echo "  Endpoint: http://$HOST:$PORT/v1/chat/completions"
+            echo "  Context: ${CTX:-4096} tokens"
+            echo ""
+            echo "  Example:"
+            echo "    curl -s http://$HOST:$PORT/v1/chat/completions \\"
+            echo "      -H 'Content-Type: application/json' \\"
+            echo "      -d '{\"messages\":[{\"role\":\"user\",\"content\":\"hello\"}]}'"
+            return 0
+        fi
+        echo -n "."
+        sleep 2
+    done
+
+    echo " FAILED (check /tmp/code-llm.log)"
+    rm -f "$PIDFILE"
+    return 1
+}
+
+stop() {
+    if ! is_running; then
+        echo "Not running."
+        rm -f "$PIDFILE"
+        return 0
+    fi
+
+    local pid=$(cat "$PIDFILE")
+    echo "Stopping llama.cpp server (PID $pid)..."
+    kill "$pid" 2>/dev/null || true
+    sleep 1
+    if kill -0 "$pid" 2>/dev/null; then
+        kill -9 "$pid" 2>/dev/null || true
+    fi
+    rm -f "$PIDFILE"
+    echo "Stopped."
+}
+
+status() {
+    if is_running; then
+        local pid=$(cat "$PIDFILE")
+        local rss=$(ps -o rss= -p "$pid" 2>/dev/null | awk '{printf "%.0f MB", $1/1024}')
+        echo "RUNNING  PID=$pid  RSS=$rss"
+        echo "  Endpoint: http://$HOST:$PORT/v1/chat/completions"
+        echo "  Log: /tmp/code-llm.log"
+    else
+        echo "STOPPED"
+    fi
+}
+
+test_model() {
+    if ! is_running; then
+        echo "Server not running. Start it first: code-llm start"
+        return 1
+    fi
+    echo "Testing code generation..."
+    local start=$(date +%s%N)
+    local resp
+    resp=$(curl -s "http://$HOST:$PORT/v1/chat/completions" \
+        -H "Content-Type: application/json" \
+        -d '{
+            "messages": [{"role":"user","content":"Write a Python function to reverse a linked list. Include Node class. Be concise."}],
+            "max_tokens": 800,
+            "temperature": 1.0,
+            "top_p": 0.95
+        }')
+    local end=$(date +%s%N)
+    local elapsed=$(( (end - start) / 1000000 ))
+
+    # Gemma 4 E2B is a thinking model: reasoning_content first, then content
+    echo "$resp" | python3 -c "
+import sys, json
+r = json.load(sys.stdin)
+c = r['choices'][0]
+msg = c['message']
+content = msg.get('content','')
+reasoning = msg.get('reasoning_content','')
+u = r.get('usage',{})
+tokens = u.get('completion_tokens','?')
+
+if reasoning:
+    print(f'[thinking: {len(reasoning)} chars]')
+    print()
+print(content)
+print()
+print('--- STATS ---')
+print(f'  Total tokens: {tokens}')
+" 2>/dev/null
+
+    local tokens=$(echo "$resp" | python3 -c "import sys,json; print(json.load(sys.stdin).get('usage',{}).get('completion_tokens',0))" 2>/dev/null)
+    echo "  Wall time: ${elapsed}ms"
+    if [ "$tokens" != "?" ] && [ "$tokens" -gt 0 ] && [ "$elapsed" -gt 0 ]; then
+        local tps=$(python3 -c "print(f'{$tokens / $elapsed * 1000:.1f}')")
+        echo "  Est tok/s: $tps (includes thinking tokens)"
+    fi
+}
+
+chat() {
+    if ! is_running; then
+        echo "Server not running. Start it first: code-llm start"
+        return 1
+    fi
+    echo "Interactive chat with Gemma 4 E2B (thinking model). Type 'exit' to quit."
+    echo "Add --think to see reasoning. Context resets each message."
+    echo ""
+
+    local show_think=false
+    local sys_msg="You are a helpful coding assistant. Be concise and correct."
+    local max_tok=800
+
+    # Parse simple flags
+    while [[ "${1:-}" == -* ]]; do
+        case "$1" in
+            --think) show_think=true; shift ;;
+            --tokens) max_tok="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+
+    while true; do
+        echo -n "> "
+        read -r -e user_input
+        [ -z "$user_input" ] && continue
+        [ "$user_input" == "exit" ] || [ "$user_input" == "quit" ] && break
+
+        # Build messages with system prompt
+        local messages="[{\"role\":\"system\",\"content\":\"$sys_msg\"},"
+        messages+="{\"role\":\"user\",\"content\":\"$(echo "$user_input" | sed 's/"/\\"/g; s/\n/\\n/g')\"}]"
+
+        local resp
+        resp=$(curl -s "http://$HOST:$PORT/v1/chat/completions" \
+            -H "Content-Type: application/json" \
+            -d "{\"messages\":$messages,\"max_tokens\":$max_tok,\"temperature\":1.0,\"top_p\":0.95}")
+
+        echo "$resp" | python3 -c "
+import sys, json
+r = json.load(sys.stdin)
+msg = r['choices'][0]['message']
+show = ${show_think}
+rc = msg.get('reasoning_content','')
+if rc and show:
+    print('[THINKING]')
+    print(rc)
+    print()
+content = msg.get('content','')
+if content:
+    print(content)
+else:
+    print('[no content - try more max_tokens]')
+" 2>/dev/null
+        echo ""
+    done
+}
+
+log() {
+    if [ -f /tmp/code-llm.log ]; then
+        tail -50 /tmp/code-llm.log
+    else
+        echo "No log file found."
+    fi
+}
+
+is_running() {
+    [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null
+}
+
+case "${1:-}" in
+    start)  start ;;
+    stop)   stop ;;
+    status) status ;;
+    test)   test_model ;;
+    chat)   chat "${@:2}" ;;
+    log)    log ;;
+    restart) stop; sleep 1; start ;;
+    *)
+        echo "Usage: code-llm {start|stop|restart|status|test|chat|log}"
+        echo ""
+        echo "  start   - Launch llama.cpp + Gemma 4 E2B with MTP (code-optimized)"
+        echo "  stop    - Stop the server"
+        echo "  restart - Stop then start"
+        echo "  status  - Show running state and memory usage"
+        echo "  test    - Run a code-gen test and show throughput"
+        echo "  chat    - Interactive coding chat (--think to see reasoning, --tokens N)"
+        echo "  log     - Tail the last 50 log lines"
+        echo ""
+        echo "Env overrides:"
+        echo "  CTX=8192 code-llm start   - Use larger context window (default 4096)"
+        echo "  PORT=8081 code-llm start   - Use different port"
+        echo "  LLAMA_BIN=/path/to/llama-server code-llm start  - Custom binary"
+        echo "  MODEL=/path/to/model.gguf code-llm start        - Custom model"
+        exit 1
+        ;;
+esac

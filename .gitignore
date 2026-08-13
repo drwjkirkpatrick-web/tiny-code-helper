@@ -1,0 +1,9 @@
+# Logs
+/tmp/code-llm.log
+
+# PID files
+*.pid
+
+# OS
+.DS_Store
+Thumbs.db
